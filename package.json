@@ -1,0 +1,18 @@
+{
+  "name": "convis",
+  "version": "1.0.0",
+  "description": "CONVIS (Consulta de Violencia Sexual) is a web application developed to convey sexual violence data (from CDMX) in a graphic way. Uses data from CDMX government API (https://datos.cdmx.gob.mx).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Germán Reyes G. & Yair Yolotl Pimentel V.",
+  "license": "ISC",
+  "devDependencies": {
+    "sass": "^1.23.0-module.beta.1",
+    "typescript": "^3.6.3"
+  },
+  "dependencies": {
+    "bootstrap": "^4.3.1"
+  }
+}
