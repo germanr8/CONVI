@@ -1,0 +1,15 @@
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
+$breakpoint-md: 768px;
+
+.map-panel {
+  padding: 15px 160px 15px 115px;
+}
+
+@media (max-width: $breakpoint-md) {
+  .map-panel {
+    padding: 0px 90px 0px 90px;
+    border-top-left-radius: 0.25rem !important;
+    border-top-right-radius: 0.25rem !important;
+    border-bottom-right-radius: 0px !important;
+  }
+}
