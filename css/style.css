@@ -9655,8 +9655,84 @@ h3 {
     border-color: #dee2e6;
   }
 }
+.info-panel .card-body {
+  padding: 0px;
+}
+.info-panel .reporte-mapa {
+  font-size: 11px;
+}
+
 .map-panel {
   padding: 15px 160px 15px 115px;
+}
+
+.report-panel {
+  padding: 15px 160px 15px 115px;
+}
+
+.amber-panel {
+  padding: 15px 160px 15px 115px;
+}
+.amber-panel .custom-select {
+  background: none;
+  background-color: white;
+  margin-bottom: 3%;
+  width: 35%;
+  font-size: 11px;
+  padding: 0px;
+}
+.amber-panel .card {
+  width: 80% !important;
+  margin: 0 auto;
+  float: none;
+  margin-bottom: 10px;
+}
+.amber-panel .mic-info {
+  color: #666666;
+  font-size: 11px;
+}
+
+.report-section .btn-xs {
+  padding: 0px 2px 0px 2px;
+}
+.report-section .custom-select {
+  background: none;
+  background-color: white;
+  margin-bottom: 3%;
+  width: 35%;
+  font-size: 11px;
+  padding: 0px;
+}
+.report-section .panel-body {
+  padding: 0px;
+}
+.report-section .list-group {
+  margin-bottom: 0;
+}
+.report-section .panel-title {
+  display: inline;
+}
+.report-section .label-info {
+  float: right;
+}
+.report-section li.list-group-item {
+  border-radius: 0;
+  border: 0;
+  border-top: 1px solid #ddd;
+}
+.report-section .mic-info {
+  color: #666666;
+  font-size: 11px;
+}
+.report-section .action {
+  margin-top: 5px;
+}
+.report-section .comment-text {
+  font-size: 12px;
+}
+.report-section .btn-block {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
 }
 
 @media (max-width: 768px) {
@@ -9665,6 +9741,20 @@ h3 {
     border-top-left-radius: 0.25rem !important;
     border-top-right-radius: 0.25rem !important;
     border-bottom-right-radius: 0px !important;
+  }
+
+  .report-panel {
+    padding: 0px 90px 0px 90px;
+    border-top-right-radius: 0px !important;
+    border-bottom-left-radius: 0.25rem !important;
+    border-bottom-right-radius: 0.25rem !important;
+  }
+
+  .amber-panel {
+    padding: 15px 8px 0px 8px;
+    border-top-right-radius: 0px !important;
+    border-bottom-left-radius: 0.25rem !important;
+    border-bottom-right-radius: 0.25rem !important;
   }
 }
 

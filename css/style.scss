@@ -1,15 +1,117 @@
 @import '../node_modules/bootstrap/scss/bootstrap.scss';
 $breakpoint-md: 768px;
+$general-panel-padding: 15px 160px 15px 115px;
+
+@mixin correctPanelRadius1() {
+  border-top-right-radius: 0px !important;
+  border-bottom-left-radius: 0.25rem !important;
+  border-bottom-right-radius: 0.25rem !important;
+}
+
+@mixin correctPanelRadius2() {
+  border-top-left-radius: 0.25rem !important;
+  border-top-right-radius: 0.25rem !important;
+  border-bottom-right-radius: 0px !important;
+}
+
+.info-panel {
+  .card-body {
+    padding: 0px;
+  }
+  .reporte-mapa {
+    font-size: 11px;
+  }
+}
 
 .map-panel {
-  padding: 15px 160px 15px 115px;
+  padding: $general-panel-padding;
+}
+
+.report-panel {
+  padding: $general-panel-padding;
+}
+
+.amber-panel {
+  padding: $general-panel-padding;
+  .custom-select {
+    background: none;
+    background-color: white;
+    margin-bottom: 3%;
+    width: 35%;
+    font-size: 11px;
+    padding: 0px;
+  }
+  .card {
+    width: 80% !important;
+    margin: 0 auto;
+    float: none;
+    margin-bottom: 10px;
+  }
+  .mic-info {
+    color: #666666;
+    font-size: 11px;
+  }
+}
+
+.report-section {
+  .btn-xs {
+    padding: 0px 2px 0px 2px;
+  }
+  .custom-select {
+    background: none;
+    background-color: white;
+    margin-bottom: 3%;
+    width: 35%;
+    font-size: 11px;
+    padding: 0px;
+  }
+  .panel-body {
+    padding: 0px;
+  }
+  .list-group {
+    margin-bottom: 0;
+  }
+  .panel-title {
+    display: inline;
+  }
+  .label-info {
+    float: right;
+  }
+  li.list-group-item {
+    border-radius: 0;
+    border: 0;
+    border-top: 1px solid #ddd;
+  }
+
+  .mic-info {
+    color: #666666;
+    font-size: 11px;
+  }
+  .action {
+    margin-top: 5px;
+  }
+  .comment-text {
+    font-size: 12px;
+  }
+  .btn-block {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+  }
 }
 
 @media (max-width: $breakpoint-md) {
   .map-panel {
     padding: 0px 90px 0px 90px;
-    border-top-left-radius: 0.25rem !important;
-    border-top-right-radius: 0.25rem !important;
-    border-bottom-right-radius: 0px !important;
+    @include correctPanelRadius2();
+  }
+
+  .report-panel {
+    padding: 0px 90px 0px 90px;
+    @include correctPanelRadius1();
+  }
+
+  .amber-panel {
+    padding: 15px 8px 0px 8px;
+    @include correctPanelRadius1();
   }
 }
