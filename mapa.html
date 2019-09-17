@@ -8,6 +8,11 @@ Yair Yolotl Pimentel Vanegas
     <meta charset="utf-8" />
     <title>CONVI</title>
     <link rel="stylesheet" href="css/style.css" />
+    <script
+      src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+      integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+      crossorigin=""
+    ></script>
   </head>
 
   <body>
@@ -61,7 +66,8 @@ Yair Yolotl Pimentel Vanegas
       <div class="row flex-row-reverse">
         <!-- Map -->
         <div class="map-panel col-md-9 col-md-push-6 bg-dark rounded-right">
-          <img src="img/cdmx_map.svg" class="img-fluid" alt="CDMX" />
+          <!--<img src="img/cdmx_map.svg" class="img-fluid" alt="CDMX" />-->
+          <div class="img-fluid" id="mapid"></div>
         </div>
         <!-- /Map -->
         <!-- Info panel -->
@@ -142,4 +148,5 @@ Yair Yolotl Pimentel Vanegas
       </footer>
     </div>
   </body>
+  <script type="text/javascript" src="js/mapa.js"></script>
 </html>
