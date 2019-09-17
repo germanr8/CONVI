@@ -1,4 +1,4 @@
-@import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
 
 //Leaflet
 /* required styles */
@@ -284,7 +284,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 /* general typography */
 .leaflet-container {
-  font: 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
+  font: 12px/1.5 'Helvetica Neue', Arial, Helvetica, sans-serif;
 }
 
 /* general toolbar styles */
@@ -347,7 +347,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 .leaflet-control-zoom-in,
 .leaflet-control-zoom-out {
-  font: bold 18px "Lucida Console", Monaco, monospace;
+  font: bold 18px 'Lucida Console', Monaco, monospace;
   text-indent: 1px;
 }
 
@@ -552,7 +552,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
   width: 24px;
   margin: 0 auto;
 
-  -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678)";
+  -ms-filter: 'progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678)';
   filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678);
 }
 .leaflet-oldie .leaflet-popup-tip-container {
@@ -602,7 +602,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
   pointer-events: none;
   border: 6px solid transparent;
   background: transparent;
-  content: "";
+  content: '';
 }
 
 /* Directions */
@@ -670,6 +670,12 @@ $general-panel-padding: 15px 160px 15px 115px;
 }
 
 .homepage {
+  .stat-card {
+    position: absolute;
+    left: 40%;
+    top: -20px;
+    border-radius: 20%;
+  }
   .carousel-inner {
     img {
       margin: auto;
@@ -829,4 +835,59 @@ $general-panel-padding: 15px 160px 15px 115px;
 
 #mapid {
   height: 100%;
+}
+
+.stat-main {
+  width: 100%;
+  height: auto;
+  border-bottom: 5px #323233 solid;
+  background: #fff;
+  text-align: center;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  transition: 0.5s;
+  margin-bottom: 28px;
+}
+
+.stat-main img {
+  border-radius: 5%;
+  margin-bottom: 20px;
+  width: 90px;
+}
+
+.stat-main h3 {
+  font-size: 20px;
+  font-weight: 200;
+}
+
+.stat-main p {
+  margin-bottom: 0;
+}
+
+.team-back {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 5px 15px 0 15px;
+  text-align: left;
+  background: #fff;
+}
+
+.team-front {
+  width: 100%;
+  height: auto;
+  position: relative;
+  z-index: 10;
+  background: #fff;
+  padding: 15px;
+  bottom: 0px;
+  transition: all 0.5s ease;
+}
+
+.stat-main:hover .team-front {
+  bottom: -200px;
+  transition: all 0.5s ease;
 }
