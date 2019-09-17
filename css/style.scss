@@ -1,6 +1,10 @@
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
 
-//Leaflet
+/****************************/
+/****************************/
+/**********LEAFLET***********/
+/****************************/
+/****************************/
 /* required styles */
 
 .leaflet-pane,
@@ -650,8 +654,11 @@ svg.leaflet-image-layer.leaflet-interactive path {
   margin-left: -12px;
   border-right-color: #fff;
 }
-
-//Leaflet
+/****************************/
+/****************************/
+/**********LEAFLET***********/
+/****************************/
+/****************************/
 
 $breakpoint-md: 768px;
 $general-panel-padding: 15px 160px 15px 115px;
