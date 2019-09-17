@@ -1,5 +1,6 @@
 @import '../node_modules/bootstrap/scss/bootstrap.scss';
 $breakpoint-md: 768px;
+$breakpoint-lg: 960px;
 $general-panel-padding: 15px 160px 15px 115px;
 
 @mixin correctPanelRadius1() {
@@ -12,6 +13,33 @@ $general-panel-padding: 15px 160px 15px 115px;
   border-top-left-radius: 0.25rem !important;
   border-top-right-radius: 0.25rem !important;
   border-bottom-right-radius: 0px !important;
+}
+
+.homepage {
+  .carousel-inner {
+    img {
+      margin: auto;
+      width: 25%;
+      height: auto;
+    }
+  }
+  .card-col {
+    padding-right: 0px;
+    .headline-card {
+      height: 100%;
+      border: 1px solid rgba(0, 0, 0, 0.125);
+      border-top-left-radius: 15px;
+      border-bottom-left-radius: 15px;
+      .headline {
+        width: 1px;
+        word-wrap: break-word;
+        white-space: pre-wrap;
+        text-transform: uppercase;
+        font-weight: 200px;
+        padding-left: 40%;
+      }
+    }
+  }
 }
 
 .info-panel {
@@ -113,5 +141,34 @@ $general-panel-padding: 15px 160px 15px 115px;
   .amber-panel {
     padding: 15px 8px 0px 8px;
     @include correctPanelRadius1();
+  }
+
+  .homepage {
+    .carousel-inner {
+      img {
+        margin: auto;
+        width: 55%;
+        height: auto;
+      }
+    }
+  }
+}
+
+@media (max-width: $breakpoint-lg) {
+  .homepage {
+    .card-col {
+      padding-right: 15px;
+      .headline-card {
+        height: 100%;
+        border: 1px solid rgba(0, 0, 0, 0.125);
+        border-top-right-radius: 15px;
+        border-bottom-left-radius: 0px;
+        .headline {
+          width: auto;
+          letter-spacing: 4px;
+          word-wrap: normal;
+        }
+      }
+    }
   }
 }

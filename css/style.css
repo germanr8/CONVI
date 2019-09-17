@@ -9655,6 +9655,29 @@ h3 {
     border-color: #dee2e6;
   }
 }
+.homepage .carousel-inner img {
+  margin: auto;
+  width: 25%;
+  height: auto;
+}
+.homepage .card-col {
+  padding-right: 0px;
+}
+.homepage .card-col .headline-card {
+  height: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
+.homepage .card-col .headline-card .headline {
+  width: 1px;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  text-transform: uppercase;
+  font-weight: 200px;
+  padding-left: 40%;
+}
+
 .info-panel .card-body {
   padding: 0px;
 }
@@ -9755,6 +9778,28 @@ h3 {
     border-top-right-radius: 0px !important;
     border-bottom-left-radius: 0.25rem !important;
     border-bottom-right-radius: 0.25rem !important;
+  }
+
+  .homepage .carousel-inner img {
+    margin: auto;
+    width: 55%;
+    height: auto;
+  }
+}
+@media (max-width: 960px) {
+  .homepage .card-col {
+    padding-right: 15px;
+  }
+  .homepage .card-col .headline-card {
+    height: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 0px;
+  }
+  .homepage .card-col .headline-card .headline {
+    width: auto;
+    letter-spacing: 4px;
+    word-wrap: normal;
   }
 }
 
