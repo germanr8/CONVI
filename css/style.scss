@@ -719,7 +719,10 @@ $general-panel-padding: 15px 160px 15px 115px;
 }
 
 .map-panel {
-  padding: $general-panel-padding;
+  padding: 15px 9px 15px 9px;
+  #mapid {
+    border-radius: 2%;
+  }
 }
 
 .report-panel {
@@ -796,8 +799,11 @@ $general-panel-padding: 15px 160px 15px 115px;
 
 @media (max-width: $breakpoint-md) {
   .map-panel {
-    padding: 0px 90px 0px 90px;
+    padding: 3px 8px 3px 8px;
     @include correctPanelRadius2();
+    #mapid {
+      height: 500px;
+    }
   }
 
   .report-panel {

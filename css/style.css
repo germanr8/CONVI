@@ -9655,6 +9655,11 @@ h3 {
     border-color: #dee2e6;
   }
 }
+/****************************/
+/****************************/
+/**********LEAFLET***********/
+/****************************/
+/****************************/
 /* required styles */
 .leaflet-pane,
 .leaflet-tile,
@@ -10387,6 +10392,11 @@ svg.leaflet-image-layer.leaflet-interactive path {
   border-right-color: #fff;
 }
 
+/****************************/
+/****************************/
+/**********LEAFLET***********/
+/****************************/
+/****************************/
 .homepage .stat-card {
   position: absolute;
   left: 40%;
@@ -10424,7 +10434,10 @@ svg.leaflet-image-layer.leaflet-interactive path {
 }
 
 .map-panel {
-  padding: 15px 160px 15px 115px;
+  padding: 15px 9px 15px 9px;
+}
+.map-panel #mapid {
+  border-radius: 2%;
 }
 
 .report-panel {
@@ -10498,10 +10511,13 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 @media (max-width: 768px) {
   .map-panel {
-    padding: 0px 90px 0px 90px;
+    padding: 3px 8px 3px 8px;
     border-top-left-radius: 0.25rem !important;
     border-top-right-radius: 0.25rem !important;
     border-bottom-right-radius: 0px !important;
+  }
+  .map-panel #mapid {
+    height: 500px;
   }
 
   .report-panel {
