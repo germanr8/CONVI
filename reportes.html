@@ -1,0 +1,162 @@
+<!--
+Jorge Germán Reyes García
+Yair Yolotl Pimentel Vanegas
+-->
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>CONVI</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <script src="js/convisScript.js"></script>
+  </head>
+
+  <body>
+    <!--Navbar -->
+    <nav class="mb-1 navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">CONVI</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent-555"
+        aria-controls="navbarSupportedContent-555"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Inicio</a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="mapa.html">Mapa</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#"
+              >Reportes<span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="amber.html">Amber</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto nav-flex-icons">
+          <li class="nav-item avatar">
+            <a class="nav-link p-0" href="#">
+              <img
+                src="img/avatar_ph.png"
+                class="rounded-circle z-depth-0"
+                alt="avatar image"
+                height="35"
+              />
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!--/Navbar-->
+    <div class="container">
+      <div class="row">
+        <!-- Menu de seleccion -->
+        <div class="info-panel card col-md-3 col-md-pull-6 bg-light">
+          <div class="card-body">
+            <h5 class="card-title">Reportes</h5>
+            <ul class="list-group" style="cursor: pointer;">
+              <li class="list-group-item list-group-item-action active">
+                Ver reportes
+              </li>
+              <li class="list-group-item list-group-item-action">
+                Realizar reporte
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /Menu de delesccion -->
+        <!-- Reportes  -->
+        <div class="report-panel col-md-9 bg-dark report-section rounded-right">
+          <select class="browser-default custom-select">
+            <option selected>Ordenar por:</option>
+            <option value="1">Fecha</option>
+            <option value="2">Alcaldía</option>
+          </select>
+          <ul class="list-group">
+            <li class="list-group-item">
+              <div>
+                <h6>Robo en bazar de Sta. Anita</h6>
+                <div class="mic-info">
+                  Por: <span class="text-primary">Anónimo</span> 16 de
+                  septiembre del 2019<br />
+                  Alcaldía: <span class="text-primary">Tlalpan</span><br />
+                  Dirección:
+                  <span class="text-primary">Ejidos de Bartolomé, 313</span>
+                </div>
+              </div>
+              <div class="comment-text">
+                El día viernes sufrí un robo en el mercado de Sta. Anita por
+                parte de un señor de altura aprox. de 1.70 mts con una sudadera
+                roja y jeans
+              </div>
+              <div class="action text-right">
+                <button
+                  type="button"
+                  class="btn btn-primary btn-xs"
+                  title="Añadir comentario"
+                >
+                  <small
+                    ><span class="add-comment">Añadir comentario</span></small
+                  >
+                </button>
+              </div>
+            </li>
+          </ul>
+          <ul class="list-group">
+            <li class="list-group-item">
+              <div>
+                <h6>Acoso en Bar Incognito</h6>
+                <div class="mic-info">
+                  Por: <span class="text-primary">Anónimo</span> 13 de
+                  septiembre del 2019<br />
+                  Alcaldía: <span class="text-primary">Xochimilco</span><br />
+                  Dirección:
+                  <span class="text-primary">Barranca las Palmas #35</span>
+                </div>
+              </div>
+              <div class="comment-text">
+                Hace 1 semana acudí a este bar en donde unos hombres ebrios nos
+                estaban molestando, fuimos a realizar el reporte con el gerente
+                pero este nunca nos atendio
+              </div>
+              <div class="action text-right">
+                <button
+                  type="button"
+                  class="btn btn-primary btn-xs"
+                  title="Añadir comentario"
+                >
+                  <small
+                    ><span class="add-comment">Añadir comentario</span></small
+                  >
+                </button>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <!-- /Reportes -->
+      </div>
+
+      <!--Footer-->
+      <footer class="page-footer ">
+        <div class="text-center py-3">
+          © 2019 Proyecto Final de Desarrollo de Aplicaciones Web
+        </div>
+        <!--/Footer-->
+      </footer>
+    </div>
+  </body>
+</html>
