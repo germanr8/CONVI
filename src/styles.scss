@@ -1,1 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Para el carousel generado por
+ng-Bootstrap. No se puede agregar en los estilos
+del componente que lo implementa porque se genera
+en runtime de forma dinámica, no es html 'estático' */
+.carousel-indicators li {
+  background-color: gray !important;
+}
