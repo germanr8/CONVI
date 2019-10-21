@@ -16,6 +16,7 @@
   <!-- /Menu de de seleccion -->
   <!-- Reportes  -->
   <div
+    *ngIf="showReportes"
     class="report-panel col-md-9 bg-dark report-section rounded-right d-none"
   >
     <select class="browser-default custom-select">
@@ -82,85 +83,163 @@
   <!-- /Reportes -->
   <!-- Formulario reportes -->
   <div
-    class="report-panel col-md-9 bg-dark report-section rounded-right text-white"
+    *ngIf="showFormulario"
+    class="report-form-panel col-md-9 bg-dark report-form-section rounded-right"
   >
-    <form>
-      <div class="form-group row">
-        <label for="titulo" class="col-sm-2 col-form-label">Título</label>
-        <div class="col-sm-12">
-          <input
-            class="form-control"
-            id="titulo"
-            placeholder="i.e., robo en Av. Coyoacán a la altura de 'X' lugar"
-          />
+    <form
+      [formGroup]="reporteForm"
+      class="bg-light report-form text-center"
+      novalidate
+    >
+      <div class="form-group col-sm-12">
+        <h5 class="text-primary font-weight-bold">
+          Formulario para envío de reporte
+        </h5>
+      </div>
+      <!-- Título -->
+      <div class="form-group">
+        <label class="center-block font-weight-bold">Título </label>
+        <input
+          class="form-control"
+          formControlName="titulo"
+          placeholder="i.e., Robo en Av. XX a la altura del supermercado XX"
+        />
+      </div>
+      <div
+        *ngIf="
+          reporteForm.controls['titulo'].invalid &&
+          (reporteForm.controls['titulo'].dirty ||
+            reporteForm.controls['titulo'].touched)
+        "
+        class="alert alert-danger form-group"
+      >
+        <div *ngIf="reporteForm.controls['titulo'].errors.required">
+          Se requiere título
         </div>
       </div>
-      <fieldset class="form-group">
-        <div class="row">
-          <legend class="col-form-label col-sm-2 pt-0">Anónimo</legend>
-          <div class="col-sm-12">
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="radio"
-                name="gridRadios"
-                id="anonimo"
-                value="anonimo"
-                checked
-              />
-              <label class="form-check-label" for="anonimo">
-                Subir anónimamente
-              </label>
-            </div>
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="radio"
-                name="gridRadios"
-                id="visible"
-                value="visible"
-              />
-              <label class="form-check-label" for="visible">
-                Subir con nombre visible
-              </label>
-            </div>
+      <!-- Anonimato -->
+      <div class="form-group">
+        <div class="d-block my-3">
+          <label class="center-block font-weight-bold">Anonimato</label>
+          <div class="custom-control custom-radio">
+            <input
+              id="noanonimo"
+              type="radio"
+              class="custom-control-input"
+              value="noanonimo"
+              name="anonimato"
+              formControlName="anonimato"
+            />
+            <label class="custom-control-label" for="noanonimo"
+              >Enviar con nombre</label
+            >
+          </div>
+
+          <div class="custom-control custom-radio">
+            <input
+              id="anonimo"
+              type="radio"
+              class="custom-control-input"
+              value="anonimo"
+              name="anonimato"
+              formControlName="anonimato"
+            />
+            <label class="custom-control-label" for="anonimo"
+              >Enviar de forma anónima</label
+            >
           </div>
         </div>
-      </fieldset>
-      <div class="form-group row">
-        <select class="col-sm-12 custom-select form-control" required>
-          <option value="">Open this select menu</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
       </div>
-      <div class="form-group row">
-        <label for="direccion" class="col-md-12 col-sm-2 col-form-label"
-          >Dirección</label
-        >
-        <div class="col-md-12 col-sm-10">
-          <input
-            class="form-control"
-            id="direccion"
-            placeholder="i.e., Lomas Estrella, #33"
-          />
+      <div
+        *ngIf="
+          reporteForm.controls['anonimato'].invalid &&
+          (reporteForm.controls['anonimato'].dirty ||
+            reporteForm.controls['anonimato'].touched)
+        "
+        class="alert alert-danger"
+      >
+        <div *ngIf="reporteForm.controls['anonimato'].errors.required">
+          Se requiere elegir una forma de envío
         </div>
       </div>
-      <div class="form-group row text-center">
-        <label for="descripcion">Descripción de los hechos</label>
+      <!-- Alcaldia -->
+      <div class="form-group">
+        <label class="center-block font-weight-bold">Alcaldía</label>
+        <div class="custom-select">
+          <select class="form-control text-center" formControlName="alcaldia">
+            <option value="" disabled>Seleccione la alcaldía</option>
+            <option
+              *ngFor="let alcaldia of alcaldias"
+              [ngValue]="alcaldia"
+              (change)="cambiarCiudad()"
+              >{{ alcaldia }}
+            </option>
+          </select>
+        </div>
+        <div
+          *ngIf="
+            reporteForm.controls['alcaldia'].invalid &&
+            (reporteForm.controls['alcaldia'].dirty ||
+              reporteForm.controls['alcaldia'].touched)
+          "
+          class="alert alert-danger"
+        >
+          <div *ngIf="reporteForm.controls['alcaldia'].errors.required">
+            Se requiere elegir una alcaldia
+          </div>
+        </div>
+      </div>
+      <!-- Dirección -->
+      <div class="form-group">
+        <label class="center-block font-weight-bold">Dirección </label>
+        <input
+          class="form-control"
+          formControlName="direccion"
+          placeholder="i.e., Lomas Estrella #333"
+        />
+      </div>
+      <div
+        *ngIf="
+          reporteForm.controls['direccion'].invalid &&
+          (reporteForm.controls['direccion'].dirty ||
+            reporteForm.controls['direccion'].touched)
+        "
+        class="alert alert-danger"
+      >
+        <div *ngIf="reporteForm.controls['direccion'].errors.required">
+          Se requiere dirección
+        </div>
+      </div>
+      <!-- Descripcion -->
+      <div class="form-group">
+        <label class="center-block font-weight-bold">Descripción </label>
         <textarea
-          class="col-12 form-control"
-          id="descripcion"
-          placeholder="Descripción lo más concisa y entendible posible"
-          required
+          class="form-control"
+          formControlName="descripcion"
+          rows="4"
+          placeholder="Descripción detalla del suceso y entendible para otras personas"
         ></textarea>
       </div>
-      <div class="form-group row text-center">
-        <div class="col-sm-12">
-          <button type="submit" class="btn btn-primary">Enviar reporte</button>
+      <div
+        *ngIf="
+          reporteForm.controls['descripcion'].invalid &&
+          (reporteForm.controls['descripcion'].dirty ||
+            reporteForm.controls['descripcion'].touched)
+        "
+        class="alert alert-danger"
+      >
+        <div *ngIf="reporteForm.controls['descripcion'].errors.required">
+          Se requiere descripción
         </div>
       </div>
+      <!-- Enviar -->
+      <button
+        type="submit"
+        [disabled]="reporteForm.pristine || reporteForm.invalid"
+        class="btn btn-primary"
+      >
+        Enviar reporte
+      </button>
     </form>
   </div>
   <!-- /Formulario reportes -->

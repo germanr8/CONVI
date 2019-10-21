@@ -1,5 +1,6 @@
 $general-panel-padding: 15px 160px 15px 115px;
 $breakpoint-md: 768px;
+$breakpoint-lg: 990px;
 
 .info-panel {
   font-size: 15px;
@@ -8,11 +9,17 @@ $breakpoint-md: 768px;
   }
 }
 
-.report-panel {
+.report-form {
+  padding: 10px;
+}
+
+.report-panel,
+.report-form-panel {
   padding: $general-panel-padding;
 }
 
-.report-section {
+.report-section,
+.report-form-section {
   .btn-xs {
     padding: 0px 2px 0px 2px;
   }
@@ -20,7 +27,6 @@ $breakpoint-md: 768px;
     background: none;
     background-color: white;
     margin-bottom: 3%;
-    width: 35%;
     font-size: 11px;
     padding: 0px;
   }
@@ -54,9 +60,10 @@ $breakpoint-md: 768px;
   }
 }
 
-@media (max-width: $breakpoint-md) {
-  .report-panel {
-    padding: 0px 90px 0px 90px;
+@media (max-width: $breakpoint-lg) {
+  .report-panel,
+  .report-form-panel {
+    padding: 10px 15px 0px 15px;
     border-top-right-radius: 0px !important;
     border-bottom-left-radius: 0.25rem !important;
     border-bottom-right-radius: 0.25rem !important;

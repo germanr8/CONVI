@@ -2,7 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router'; // Router import
-import { FormsModule } from '@angular/forms'; // Angular forms import
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // Angular forms import
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; // Import Bootstrap widgets in Angular
 import { LeafletModule } from '@asymmetrik/ngx-leaflet'; // Import Leaflet ngx module
 import { AppRoutingModule } from './app-routing.module'; // Routing module import
@@ -32,7 +32,8 @@ const routes: Routes = [
   {
     path: 'mapa',
     component: MapaComponent
-  },{
+  },
+  {
     path: 'reportes',
     component: ReportesComponent
   }
@@ -56,9 +57,10 @@ const routes: Routes = [
     FormsModule,
     NgbModule, // Add for Bootstrap widgets
     LeafletModule.forRoot(), // Add for Leaflet
-    LeafletModule // Add for Leaflet
+    LeafletModule, // Add for Leaflet
+    ReactiveFormsModule
   ],
-  exports: [RouterModule], // Add for router
+  exports: [RouterModule, FormsModule, ReactiveFormsModule],
   // Services list
   providers: [AlertasService, MapaService, ReportesService],
   bootstrap: [AppComponent]
