@@ -1,0 +1,64 @@
+$general-panel-padding: 15px 160px 15px 115px;
+$breakpoint-md: 768px;
+
+.info-panel {
+  font-size: 15px;
+  .reporte-mapa {
+    font-size: 11px;
+  }
+}
+
+.report-panel {
+  padding: $general-panel-padding;
+}
+
+.report-section {
+  .btn-xs {
+    padding: 0px 2px 0px 2px;
+  }
+  .custom-select {
+    background: none;
+    background-color: white;
+    margin-bottom: 3%;
+    width: 35%;
+    font-size: 11px;
+    padding: 0px;
+  }
+  .panel-body {
+    padding: 0px;
+  }
+  .list-group {
+    margin-bottom: 0;
+  }
+  .panel-title {
+    display: inline;
+  }
+  .label-info {
+    float: right;
+  }
+  li.list-group-item {
+    border-radius: 0;
+    border: 0;
+    border-top: 1px solid #ddd;
+  }
+
+  .mic-info {
+    color: #666666;
+    font-size: 11px;
+  }
+  .action {
+    margin-top: 5px;
+  }
+  .comment-text {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .report-panel {
+    padding: 0px 90px 0px 90px;
+    border-top-right-radius: 0px !important;
+    border-bottom-left-radius: 0.25rem !important;
+    border-bottom-right-radius: 0.25rem !important;
+  }
+}
