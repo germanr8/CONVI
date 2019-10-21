@@ -10,6 +10,9 @@ import { MenuComponent } from './menu/menu.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { AlertasComponent } from './inicio-components/alertas/alertas.component';
 
+// Services
+import { AlertasService } from './services/alertas.service';
+
 const routes: Routes = [
   {
     path: '',
@@ -32,7 +35,8 @@ const routes: Routes = [
     NgbModule // Add for Bootstrap widgets
   ],
   exports: [RouterModule], // Add for router
-  providers: [],
+  // Services list
+  providers: [AlertasService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
