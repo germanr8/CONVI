@@ -14,8 +14,7 @@ $blackBorder: 1px solid rgba(0, 0, 0, 0.125);
       word-wrap: break-word;
       white-space: pre-wrap;
       text-transform: uppercase;
-      font-weight: 200px;
-      padding-left: 40%;
+      font-weight: 400;
     }
   }
 }
@@ -23,7 +22,7 @@ $blackBorder: 1px solid rgba(0, 0, 0, 0.125);
 .carousel-inner {
   img {
     margin: auto;
-    width: 25%;
+    width: 33%;
     height: auto;
   }
 }
@@ -50,6 +49,8 @@ $blackBorder: 1px solid rgba(0, 0, 0, 0.125);
         width: auto;
         letter-spacing: 4px;
         word-wrap: normal;
+        padding-top: 2%;
+        padding-bottom: 2%;
       }
     }
   }

@@ -17,6 +17,8 @@ import { InicioComponent } from './inicio/inicio.component';
 import { AlertasComponent } from './inicio-components/alertas/alertas.component';
 import { MapaComponent } from './mapa/mapa.component';
 import { MapaPanelComponent } from './mapa-components/mapa-panel/mapa-panel.component';
+import { ReportesPanelComponent } from './reportes-components/reportes-panel/reportes-panel.component';
+import { ReportesComponent } from './reportes/reportes.component';
 
 const routes: Routes = [
   {
@@ -30,6 +32,9 @@ const routes: Routes = [
   {
     path: 'mapa',
     component: MapaComponent
+  },{
+    path: 'reportes',
+    component: ReportesComponent
   }
 ];
 
@@ -40,7 +45,9 @@ const routes: Routes = [
     InicioComponent,
     AlertasComponent,
     MapaComponent,
-    MapaPanelComponent
+    MapaPanelComponent,
+    ReportesPanelComponent,
+    ReportesComponent
   ],
   imports: [
     BrowserModule,
