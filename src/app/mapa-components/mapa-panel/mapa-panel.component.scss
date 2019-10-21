@@ -1,0 +1,36 @@
+$breakpoint-md: 768px;
+$breakpoint-lg: 990px;
+
+.info-panel {
+  font-size: 15px;
+  max-height: 630px;
+  overflow-y: scroll;
+  padding-left: 0px;
+  padding-right: 0px;
+  .reporte-mapa {
+    font-size: 11px;
+  }
+}
+
+.map-panel {
+  padding: 15px 9px 15px 9px;
+  #mapid {
+    border-radius: 2%;
+    height: 100%;
+  }
+}
+
+@media (max-width: $breakpoint-lg) {
+  #mapid {
+    height: 500px !important;
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .map-panel {
+    padding: 3px 8px 3px 8px;
+    border-top-left-radius: 0.25rem !important;
+    border-top-right-radius: 0.25rem !important;
+    border-bottom-right-radius: 0px !important;
+  }
+}

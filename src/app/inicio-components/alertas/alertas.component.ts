@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AlertasService } from '../../services/alertas.service';
 
 @Component({
