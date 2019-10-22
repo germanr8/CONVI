@@ -49,6 +49,11 @@ const routes: Routes = [
     path: 'amber',
     component: AmberComponent,
     data: { animation: 'Amber' }
+  },
+  {
+    path: '**',
+    pathMatch: 'full',
+    redirectTo: '/inicio'
   }
 ];
 
