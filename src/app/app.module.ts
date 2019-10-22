@@ -6,6 +6,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // Angular fo
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; // Import Bootstrap widgets in Angular
 import { LeafletModule } from '@asymmetrik/ngx-leaflet'; // Import Leaflet ngx module
 import { AppRoutingModule } from './app-routing.module'; // Routing module import
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // Animations module import
+
 // Services
 import { AlertasService } from './services/alertas.service';
 import { MapaService } from './services/mapa.service';
@@ -25,23 +27,28 @@ import { AmberPanelComponent } from './amber-components/amber-panel/amber-panel.
 const routes: Routes = [
   {
     path: '',
-    component: InicioComponent
+    pathMatch: 'full',
+    redirectTo: '/inicio'
   },
   {
     path: 'inicio',
-    component: InicioComponent
+    component: InicioComponent,
+    data: { animation: 'Inicio' }
   },
   {
     path: 'mapa',
-    component: MapaComponent
+    component: MapaComponent,
+    data: { animation: 'Mapa' }
   },
   {
     path: 'reportes',
-    component: ReportesComponent
+    component: ReportesComponent,
+    data: { animation: 'Reportes' }
   },
   {
     path: 'amber',
-    component: AmberComponent
+    component: AmberComponent,
+    data: { animation: 'Amber' }
   }
 ];
 
@@ -66,7 +73,8 @@ const routes: Routes = [
     LeafletModule.forRoot(), // Add for Leaflet
     LeafletModule, // Add for Leaflet
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule
   ],
   exports: [RouterModule, FormsModule, ReactiveFormsModule],
   // Services list

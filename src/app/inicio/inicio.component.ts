@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { transition } from '@angular/animations';
 
 @Component({
   selector: 'app-inicio',
@@ -6,10 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./inicio.component.scss']
 })
 export class InicioComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
