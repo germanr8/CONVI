@@ -14,7 +14,7 @@ export class MapaPanelComponent implements OnInit {
   cifraHomicidios;
   cifraRoboAutos;
   cifraSecuestros;
-  alcaldiasDatos = fetchJSON("../../assets/geojson/alcaldias.geojson");
+  alcaldiasDatos;
   reportes: Reporte[] = [];
   constructor(
     private reportesService: ReportesService,
@@ -29,6 +29,21 @@ export class MapaPanelComponent implements OnInit {
     this.cifraHomicidios = this.reportesService.getCifraHomicidios();
     this.cifraRoboAutos = this.reportesService.getCifraRoboAutos();
     this.cifraSecuestros = this.reportesService.getCifraSecuestros();
+    this.alcaldiasDatos = this.mapaService.getAlcaldiasDatos();
+  }
+  highlightFeature(e) {
+    var layer = e.target;
+
+    layer.setStyle({
+      weight: 5,
+      color: "#666",
+      dashArray: "",
+      fillOpacity: 0.7
+    });
+
+    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+      layer.bringToFront();
+    }
   }
   async onMapReady(map: L.Map) {
     setTimeout(() => {
@@ -36,10 +51,4 @@ export class MapaPanelComponent implements OnInit {
     }, 0);
     L.geoJSON(await this.alcaldiasDatos).addTo(map);
   }
-}
-
-function fetchJSON(url) {
-  return fetch(url).then(function(response) {
-    return response.json();
-  });
 }

@@ -6,6 +6,7 @@ import { latLng, tileLayer, circle, polygon, marker } from "leaflet";
 })
 export class MapaService {
   mapOptions;
+  alcaldiasDatos;
   constructor() {}
 
   construirMapa() {
@@ -35,5 +36,16 @@ export class MapaService {
     };
 
     return this.mapOptions;
+  }
+  fetchJSON(url) {
+    return fetch(url).then(function(response) {
+      return response.json();
+    });
+  }
+  getAlcaldiasDatos() {
+    this.alcaldiasDatos = this.fetchJSON(
+      "../../assets/geojson/alcaldias.geojson"
+    );
+    return this.alcaldiasDatos;
   }
 }
