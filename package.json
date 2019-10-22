@@ -1,7 +1,7 @@
 {
-  "name": "convis",
+  "name": "convi",
   "version": "1.0.0",
-  "description": "CONVIS (Consulta de Violencia) is a web application developed to convey violence data (from CDMX) in a graphic way. Uses data from CDMX government API (https://datos.cdmx.gob.mx).",
+  "description": "CONVI (Consulta de Violencia) is a web application developed to convey violence data (from CDMX) in a graphic way. Uses data from CDMX government API (https://datos.cdmx.gob.mx).",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

@@ -45,12 +45,12 @@
         <div>
           <h6>{{ reporte.titulo }}</h6>
           <div class="mic-info">
-            Por: <span class="text-convis">Anónimo</span> {{ reporte.fecha
+            Por: <span class="text-convi">Anónimo</span> {{ reporte.fecha
             }}<br />
-            Alcaldía: <span class="text-convis">{{ reporte.alcaldia }}</span
+            Alcaldía: <span class="text-convi">{{ reporte.alcaldia }}</span
             ><br />
             Dirección:
-            <span class="text-convis">{{ reporte.direccion }}</span>
+            <span class="text-convi">{{ reporte.direccion }}</span>
           </div>
         </div>
         <div class="comment-text">
@@ -59,7 +59,7 @@
         <div class="action text-right">
           <button
             type="button"
-            class="btn btn-convis btn-xs"
+            class="btn btn-convi btn-xs"
             title="Añadir comentario"
           >
             <small><span class="add-comment">Añadir comentario</span></small>
@@ -80,7 +80,7 @@
       novalidate
     >
       <div class="form-group col-sm-12">
-        <h5 class="text-convis font-weight-bold">
+        <h5 class="text-convi font-weight-bold">
           Formulario para envío de reporte
         </h5>
       </div>
@@ -224,7 +224,7 @@
       <button
         type="submit"
         [disabled]="reporteForm.pristine || reporteForm.invalid"
-        class="btn btn-convis"
+        class="btn btn-convi"
       >
         Enviar reporte
       </button>
