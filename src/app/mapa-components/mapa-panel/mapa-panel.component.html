@@ -1,7 +1,13 @@
 <div class="row flex-row-reverse">
   <!-- Map -->
   <div class="map-panel col-lg-9 col-lg-push-6 bg-dark rounded-right">
-    <div class="img-fluid" id="mapid" leaflet [leafletOptions]="options"></div>
+    <div
+      class="img-fluid"
+      id="mapid"
+      leaflet
+      [leafletOptions]="options"
+      (leafletMapReady)="onMapReady($event)"
+    ></div>
   </div>
   <!-- ./Map -->
   <!-- Info panel -->

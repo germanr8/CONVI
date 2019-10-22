@@ -1,18 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { ReportesService } from '../../services/reportes.service';
-import { MapaService } from '../../services/mapa.service';
-import { Reporte } from '../../models/Reporte';
+import { Component, OnInit } from "@angular/core";
+import { ReportesService } from "../../services/reportes.service";
+import { MapaService } from "../../services/mapa.service";
+import { Reporte } from "../../models/Reporte";
+import * as L from "leaflet";
 
 @Component({
-  selector: 'app-mapa-panel',
-  templateUrl: './mapa-panel.component.html',
-  styleUrls: ['./mapa-panel.component.scss']
+  selector: "app-mapa-panel",
+  templateUrl: "./mapa-panel.component.html",
+  styleUrls: ["./mapa-panel.component.scss"]
 })
 export class MapaPanelComponent implements OnInit {
   options;
   cifraHomicidios;
   cifraRoboAutos;
   cifraSecuestros;
+  alcaldiasDatos = fetchJSON("../../assets/geojson/alcaldias.geojson");
   reportes: Reporte[] = [];
   constructor(
     private reportesService: ReportesService,
@@ -28,4 +30,16 @@ export class MapaPanelComponent implements OnInit {
     this.cifraRoboAutos = this.reportesService.getCifraRoboAutos();
     this.cifraSecuestros = this.reportesService.getCifraSecuestros();
   }
+  async onMapReady(map: L.Map) {
+    setTimeout(() => {
+      map.invalidateSize();
+    }, 0);
+    L.geoJSON(await this.alcaldiasDatos).addTo(map);
+  }
+}
+
+function fetchJSON(url) {
+  return fetch(url).then(function(response) {
+    return response.json();
+  });
 }
