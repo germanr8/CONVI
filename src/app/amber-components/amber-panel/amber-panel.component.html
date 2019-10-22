@@ -1,0 +1,192 @@
+<div class="row">
+  <!-- Menu de seleccion -->
+  <div class="info-panel card col-md-4 col-md-pull-6 bg-light">
+    <div class="card-body">
+      <h5 class="card-title text-center font-weight-bold">
+        ALERTA AMBER MÉXICO
+      </h5>
+      <ul class="list-group" style="cursor: pointer;">
+        <button
+          [className]="
+            showAlertas
+              ? 'list-group-item list-group-item-action active'
+              : 'list-group-item list-group-item-action inactive'
+          "
+          (click)="mostrarAlertas()"
+        >
+          Ver carteles de reportes
+        </button>
+
+        <button
+          [className]="
+            showInformacion
+              ? 'list-group-item list-group-item-action active'
+              : 'list-group-item list-group-item-action inactive'
+          "
+          (click)="mostrarInformacion()"
+        >
+          Ver información *
+        </button>
+      </ul>
+      <small id="emailHelp" class="form-text text-muted text-justify"
+        >* Este es un espacio meramente informativo. Para levantar un reporte,
+        atienda a las autoridades pertinentes. Información original en
+        <a
+          class="text-convis"
+          href="http://www.alertaamber.gob.mx/swb/alertaamber/PreguntasFrecuentes"
+          >preguntas frecuentes de Alerta Amber México</a
+        ></small
+      >
+    </div>
+  </div>
+  <!-- /Menu de de seleccion -->
+  <!-- Alertas  -->
+  <div
+    *ngIf="showAlertas"
+    class="amber-panel col-md-8 bg-dark amber-panel rounded-right"
+  >
+    <label class="center-block text-white">Ordenar por: </label>
+    <select class="browser-default custom-select">
+      <option selected disabled>-- Orden --</option>
+      <option value="1">Fecha</option>
+      <option value="2">Alcaldía</option>
+    </select>
+    <div *ngFor="let alerta of alertas" class="card" style="width: 18rem;">
+      <img class="card-img-top" src="{{ alerta.url }}" alt="Alerta amber" />
+      <div class="card-body mic-info">
+        <p class="card-text">
+          Por: <span class="text-convis">{{ alerta.autor }}</span>
+          {{ alerta.fecha }}<br />
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- /Alertas -->
+  <!-- Información -->
+  <div
+    *ngIf="showInformacion"
+    class="amber-panel col-md-8 bg-dark amber-panel rounded-right text-white"
+  >
+    <img
+      src="../../../assets/img/alertaAmberLogo.png"
+      class="img-fluid"
+      alt="Alerta amber logo"
+    />
+    <label class="center-block font-weight-bold "
+      >1. ¿Qué es Alerta AMBER México a nivel Federal?
+    </label>
+    <p>
+      Es un programa que establece una herramienta eficaz de difusión, que ayuda
+      a la pronta localización y recuperación de niñas, niños y adolescentes que
+      se encuentren en riesgo inminente de sufrir daño grave por motivo de no
+      localización o cualquier circunstancia donde se presuma la comisión de
+      algún delito ocurrido en territorio nacional. Es independiente de la
+      denuncia o proceso penal que inicien las autoridades competentes.
+    </p>
+    <br />
+    <label class="center-block font-weight-bold "
+      >2. ¿Cómo funciona Alerta AMBER México?
+    </label>
+    <p>
+      A través de la difusión masiva e inmediata de un formato único de Datos
+      con fotografía, en todos los medios de comunicación disponibles, para lo
+      cual el Gobierno de la República puede activar una alerta nacional o
+      internacional, o en su caso, coordinar la activación de una alerta
+      estatal, con la participación de todos los órdenes de gobierno, sociedad
+      civil, medios de comunicación, empresas y todos aquellos sectores que
+      deseen colaborar para sumar esfuerzos y potenciar la búsqueda y
+      localización.
+    </p>
+    <br />
+    <label class="center-block font-weight-bold "
+      >3. ¿Quién es la autoridad encargada de autorizar y activar la Alerta
+      AMBER México?
+    </label>
+    <p>
+      La Procuraduría General de la República (PGR) a través de la Fiscalía
+      Especial para los Delitos de Violencia contra las Mujeres y Trata de
+      Personas (FEVIMTRA), evalúa, analiza y en su caso, realiza la activación.
+      En este esfuerzo, participan la Secretaría de Gobernación (SEGOB [Comisión
+      Nacional de Seguridad CNS, Instituto Nacional de Migración INM]), la
+      Secretaría de Comunicaciones y Transportes (SCT), la Comisión Nacional de
+      los Derechos Humanos (CNDH), y la Comisión Ejecutiva de Atención a
+      Víctimas (CEAV), quienes integran el Comité Nacional de Alerta AMBER
+      México. También participan la Secretaría de Relaciones Exteriores (SRE),
+      la Secretaría de Educación Pública (SEP), la Secretaría de Salud (SS), la
+      Secretaría de Turismo (SECTUR) y el Sistema Nacional para el Desarrollo
+      Integral de la Familia (DIF). Para la operatividad del programa se cuenta
+      con un Comité Nacional, una Coordinación Nacional y Coordinaciones
+      independientes de los gobiernos estatales en cada una de las 32 entidades
+      federativas, así como enlaces en todas las delegaciones de la Procuraduría
+      General de la República (PGR).
+    </p>
+    <br />
+    <label class="center-block font-weight-bold "
+      >4. ¿Cuáles son los criterios que se valoran para la activación de la
+      Alerta AMBER México?
+    </label>
+    <p>
+      Una vez que se recibe el reporte de no localización de una niña, niño o
+      adolescente el o la enlace de Alerta AMBER en la entidad federativa
+      correspondiente, valora la procedencia para la activación de una alerta de
+      acuerdo a : a. Que la niña, niño o adolescente sea menor de 18 años. b.
+      Que se encuentra en riesgo inminente de sufrir daño grave a su integridad
+      personal. c Que exista información suficiente: nombre, edad, sexo,
+      características físicas, señas particulares, padecimientos,
+      discapacidades, vestimenta que portaba al momento de la ausencia, así como
+      la descripción de las circunstancias de los hechos, las personas y
+      vehículos involucrados, la última vez que fue vista y alguna otra
+      información que se considere relevante
+    </p>
+    <br />
+    <label class="center-block font-weight-bold "
+      >5. ¿Cuáles son los alcances de la Alerta AMBER México?</label
+    >
+    <p>
+      Dependiendo de las circunstancias del caso se puede activar una Alerta
+      Estatal, Nacional o Internacional.
+    </p>
+    <br />
+    <label class="center-block font-weight-bold ">6. ¿Cómo puedo ayudar?</label>
+    <p>
+      Si tienes algún dato o información sobre la persona reportada, comunícate
+      al 01 800 00 854 00 las 24 horas, los 365 días del año. ¡Tú puedes ayudar
+      a que niñas, niños y adolescentes regresen a sus hogares!.
+    </p>
+    <br />
+    <label class="center-block font-weight-bold "
+      >7. ¿Qué procede si el caso no reúne los criterios para activar una Alerta
+      AMBER?</label
+    >
+    <p>
+      La autoridad correspondiente en el marco de sus atribuciones, llevará a
+      cabo las acciones necesarias para la investigación y pronta localización
+      de niñas, niños y adolescentes. La alerta es independiente a la
+      investigación y demás mecanismos que implementan las autoridades para
+      localizar y recuperar lo más pronto posible a las niñas, niños y
+      adolescentes, por lo tanto, el hecho de que no proceda la activación de
+      una alerta, no significa que no se lleve a cabo una investigación o que no
+      se realicen acciones para la pronta localización de las niñas, niños y
+      adolescentes.
+    </p>
+    <br />
+    <label class="center-block font-weight-bold "
+      >8. ¿Qué otros paí­ses participan en programa Alerta AMBER?</label
+    >
+    <p>
+      Estados Unidos de América, Canadá, Inglaterra, Irlanda, Francia, Alemania,
+      Holanda, Malasia, Grecia. México, es el primer país en Latinoamérica en
+      adoptar el Programa Alerta AMBER.
+    </p>
+    <br />
+    <label class="center-block font-weight-bold "
+      >9. ¿Dónde puedo solicitar ayuda?</label
+    >
+    <p>
+      Llama al número 01 800 00 854 00 con cobertura nacional las 24 horas de
+      los 365 días del año.
+    </p>
+    <br />
+  </div>
+  <!-- /Información-->
+</div>

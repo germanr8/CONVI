@@ -1,6 +1,6 @@
 <div class="row">
   <!-- Menu de seleccion -->
-  <div class="info-panel card col-md-3 col-md-pull-6 bg-light">
+  <div class="info-panel card col-md-4 col-md-pull-6 bg-light">
     <div class="card-body">
       <h5 class="card-title text-center font-weight-bold">REPORTES</h5>
       <ul class="list-group" style="cursor: pointer;">
@@ -11,7 +11,6 @@
               : 'list-group-item list-group-item-action inactive'
           "
           (click)="mostrarReportes()"
-          id="test"
         >
           Ver reportes
         </button>
@@ -23,7 +22,6 @@
               : 'list-group-item list-group-item-action inactive'
           "
           (click)="mostrarFormulario()"
-          id="test"
         >
           Realizar reporte
         </button>
@@ -34,10 +32,11 @@
   <!-- Reportes  -->
   <div
     *ngIf="showReportes"
-    class="report-panel col-md-9 bg-dark report-section rounded-right"
+    class="report-panel col-md-8 bg-dark report-section rounded-right"
   >
+    <label class="center-block text-white">Ordenar por: </label>
     <select class="browser-default custom-select">
-      <option selected>Ordenar por:</option>
+      <option selected disabled>-- Orden --</option>
       <option value="1">Fecha</option>
       <option value="2">Alcaldía</option>
     </select>
@@ -46,12 +45,12 @@
         <div>
           <h6>{{ reporte.titulo }}</h6>
           <div class="mic-info">
-            Por: <span class="text-primary">Anónimo</span> {{ reporte.fecha
+            Por: <span class="text-convis">Anónimo</span> {{ reporte.fecha
             }}<br />
-            Alcaldía: <span class="text-primary">{{ reporte.alcaldia }}</span
+            Alcaldía: <span class="text-convis">{{ reporte.alcaldia }}</span
             ><br />
             Dirección:
-            <span class="text-primary">{{ reporte.direccion }}</span>
+            <span class="text-convis">{{ reporte.direccion }}</span>
           </div>
         </div>
         <div class="comment-text">
@@ -60,7 +59,7 @@
         <div class="action text-right">
           <button
             type="button"
-            class="btn btn-primary btn-xs"
+            class="btn btn-convis btn-xs"
             title="Añadir comentario"
           >
             <small><span class="add-comment">Añadir comentario</span></small>
@@ -73,7 +72,7 @@
   <!-- Formulario reportes -->
   <div
     *ngIf="showFormulario"
-    class="report-form-panel col-md-9 bg-dark report-form-section rounded-right"
+    class="report-form-panel col-md-8 bg-dark report-form-section rounded-right"
   >
     <form
       [formGroup]="reporteForm"
@@ -81,7 +80,7 @@
       novalidate
     >
       <div class="form-group col-sm-12">
-        <h5 class="text-primary font-weight-bold">
+        <h5 class="text-convis font-weight-bold">
           Formulario para envío de reporte
         </h5>
       </div>
@@ -156,7 +155,7 @@
         <label class="center-block font-weight-bold">Alcaldía</label>
         <div class="custom-select">
           <select class="form-control text-center" formControlName="alcaldia">
-            <option value="" disabled>Seleccione la alcaldía</option>
+            <option value="" disabled>--Alcaldía--</option>
             <option
               *ngFor="let alcaldia of alcaldias"
               [ngValue]="alcaldia"
@@ -225,7 +224,7 @@
       <button
         type="submit"
         [disabled]="reporteForm.pristine || reporteForm.invalid"
-        class="btn btn-primary"
+        class="btn btn-convis"
       >
         Enviar reporte
       </button>

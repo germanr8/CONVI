@@ -10,10 +10,44 @@ en runtime de forma dinámica, no es html 'estático' */
 
 body {
   background-image: url('src/assets/img/bg-pattern-2.png');
-  font-family: 'Cardo', sans-serif !important;
+  font-family: 'Open-Sans', sans-serif !important;
 }
 
 h1,
 .main-subtitle {
   font-family: 'Oswald', sans-serif !important;
+}
+
+/* Sustitución del color primary al color principal de CONVIS */
+.list-group-item.active {
+  background-color: #5f9ea0 !important;
+  border-color: #5f9ea0 !important;
+}
+
+.text-convis {
+  color: #5f9ea0 !important;
+}
+
+.btn-convis {
+  color: #fff !important;
+  background-color: #5f9ea0 !important;
+  border-color: #5f9ea0 !important;
+}
+
+.btn-convis:hover {
+  color: #fff;
+  background-color: #4b7e80 !important;
+  border-color: #4b7e80 !important;
+}
+
+.btn-convis:focus,
+.btn-convis.focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+}
+
+.btn-convis.disabled,
+.btn-convis:disabled {
+  color: #fff !important;
+  background-color: #5f9ea0 !important;
+  border-color: #5f9ea0 !important;
 }

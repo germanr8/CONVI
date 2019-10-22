@@ -19,6 +19,8 @@ import { MapaComponent } from './mapa/mapa.component';
 import { MapaPanelComponent } from './mapa-components/mapa-panel/mapa-panel.component';
 import { ReportesPanelComponent } from './reportes-components/reportes-panel/reportes-panel.component';
 import { ReportesComponent } from './reportes/reportes.component';
+import { AmberComponent } from './amber/amber.component';
+import { AmberPanelComponent } from './amber-components/amber-panel/amber-panel.component';
 
 const routes: Routes = [
   {
@@ -36,6 +38,10 @@ const routes: Routes = [
   {
     path: 'reportes',
     component: ReportesComponent
+  },
+  {
+    path: 'amber',
+    component: AmberComponent
   }
 ];
 
@@ -48,17 +54,19 @@ const routes: Routes = [
     MapaComponent,
     MapaPanelComponent,
     ReportesPanelComponent,
-    ReportesComponent
+    ReportesComponent,
+    AmberComponent,
+    AmberPanelComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterModule.forRoot(routes), // Add for router
-    FormsModule,
     NgbModule, // Add for Bootstrap widgets
     LeafletModule.forRoot(), // Add for Leaflet
     LeafletModule, // Add for Leaflet
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   exports: [RouterModule, FormsModule, ReactiveFormsModule],
   // Services list
