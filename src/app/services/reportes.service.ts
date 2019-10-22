@@ -7,7 +7,39 @@ import { compilePipeFromRender2 } from '@angular/compiler/src/render3/r3_pipe_co
 })
 export class ReportesService {
   ultimosReportes: Reporte[] = [];
+  todosReportes: Reporte[] = [];
   constructor() {}
+
+  getTodosReportes(/* Tendra que recibir el nombre de la alcaldia como parametro */) {
+    /* WARNING: Cambiar! Está hardcodeado!! */
+    let com1 = new Reporte();
+    com1.titulo = 'Robo en bazar de Sta. Anita';
+    com1.autor = 'Anónimo';
+    com1.fecha = '16 de septiembre del 2019';
+    com1.direccion = 'Ejidos de Bartalomé, 313';
+    com1.descripcion =
+      'El día viernes sufrí un robo en el mercado de Sta. Anita por parte de un señor de altura aprox. de 1.70 mts con una sudadera roja y jeans.';
+
+    let com2 = new Reporte();
+    com2.titulo = 'Intento de secuestro en Lomas Estrella';
+    com2.autor = 'María J.';
+    com2.fecha = '21 de octubre del 2019';
+    com2.direccion = 'Lomas Estrella #25';
+    com2.descripcion =
+      'Me intentaron secuestrar en la esquina de la calle que da con vista al arroyo...';
+
+    let com3 = new Reporte();
+    com3.titulo = 'Ejemplo título 3';
+    com3.autor = 'Juanita 3';
+    com3.fecha = '27 de octubre del 2020';
+    com3.direccion = 'Avenida Colorines 123';
+    com3.descripcion =
+      'Lorem ipsum sit dolor et amet waranai sef et mulas oiun dolor et amet waranai sef et mulas oiun dolor et amet waranai sef et mulas oiun';
+
+    this.todosReportes = [com1, com2, com3];
+
+    return this.todosReportes;
+  }
 
   getReportesRecientes(/* Tendra que recibir el nombre de la alcaldia como parametro */) {
     /* WARNING: Cambiar! Está hardcodeado!! */

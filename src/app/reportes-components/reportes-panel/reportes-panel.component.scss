@@ -63,7 +63,7 @@ $breakpoint-lg: 990px;
 @media (max-width: $breakpoint-lg) {
   .report-panel,
   .report-form-panel {
-    padding: 10px 15px 0px 15px;
+    padding: 10px 15px 10px 15px;
     border-top-right-radius: 0px !important;
     border-bottom-left-radius: 0.25rem !important;
     border-bottom-right-radius: 0.25rem !important;

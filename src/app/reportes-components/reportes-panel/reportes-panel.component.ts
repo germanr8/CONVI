@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MapaService } from '../../services/mapa.service';
+import { ReportesService } from '../../services/reportes.service';
 import { Reporte } from '../../models/Reporte';
 
 @Component({
@@ -9,10 +9,11 @@ import { Reporte } from '../../models/Reporte';
   styleUrls: ['./reportes-panel.component.scss']
 })
 export class ReportesPanelComponent implements OnInit {
-  showReportes;
-  showFormulario;
+  showReportes: boolean;
+  showFormulario: boolean;
   reporteForm: FormGroup;
   nombreAlcaldia;
+  reportes: Reporte[] = [];
   alcaldias = [
     'Tlalpan',
     'Venustiano Carranza',
@@ -31,7 +32,10 @@ export class ReportesPanelComponent implements OnInit {
     'Álvaro Obregón',
     'Xochimilco'
   ];
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private reportesService: ReportesService
+  ) {
     this.showReportes = true;
     this.showFormulario = false;
 
@@ -44,5 +48,17 @@ export class ReportesPanelComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.reportes = this.reportesService.getTodosReportes();
+  }
+
+  mostrarReportes() {
+    this.showReportes = true;
+    this.showFormulario = false;
+  }
+
+  mostrarFormulario() {
+    this.showReportes = false;
+    this.showFormulario = true;
+  }
 }
