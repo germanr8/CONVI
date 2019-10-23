@@ -15,6 +15,15 @@ export class MapaPanelComponent implements OnInit {
   cifraRoboAutos;
   cifraSecuestros;
   alcaldiasDatos;
+  estilo;
+  geojsonMarkerOptions = {
+    radius: 8,
+    fillColor: "#ff7800",
+    color: "#000",
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 0.8
+  };
   reportes: Reporte[] = [];
   constructor(
     private reportesService: ReportesService,
@@ -30,25 +39,25 @@ export class MapaPanelComponent implements OnInit {
     this.cifraRoboAutos = this.reportesService.getCifraRoboAutos();
     this.cifraSecuestros = this.reportesService.getCifraSecuestros();
     this.alcaldiasDatos = this.mapaService.getAlcaldiasDatos();
+    console.log(this.alcaldiasDatos);
   }
-  highlightFeature(e) {
-    var layer = e.target;
 
-    layer.setStyle({
-      weight: 5,
-      color: "#666",
-      dashArray: "",
-      fillOpacity: 0.7
-    });
-
-    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-      layer.bringToFront();
-    }
-  }
   async onMapReady(map: L.Map) {
     setTimeout(() => {
       map.invalidateSize();
     }, 0);
-    L.geoJSON(await this.alcaldiasDatos).addTo(map);
+    //var myLayer = L.geoJSON().addTo(map);
+
+    L.geoJSON(await this.alcaldiasDatos, {
+      style: function(feature) {
+        switch (feature.properties.cve_mun) {
+          case "002":
+            return { color: "#ff0000" };
+          case "003":
+            return { color: "#0000ff" };
+        }
+      }
+    }).addTo(map);
+    //myLayer.addData(await this.alcaldiasDatos);
   }
 }

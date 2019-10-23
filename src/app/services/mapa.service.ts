@@ -47,5 +47,30 @@ export class MapaService {
       "../../assets/geojson/alcaldias.geojson"
     );
     return this.alcaldiasDatos;
+  } /*
+  getColor(d) {
+    return (d = "002"
+      ? "#800026"
+      : (d = "003"
+          ? "#BD0026"
+          : (d = "004"
+              ? "#E31A1C"
+              : (d = "005"
+                  ? "#FC4E2A"
+                  : (d = "006"
+                      ? "#FD8D3C"
+                      : (d = "007"
+                          ? "#FEB24C"
+                          : (d = "008" ? "#FED976" : "#FFEDA0")))))));
   }
+  style(features) {
+    return {
+      fillColor: this.getColor(features.properties.cve_mun),
+      weight: 2,
+      opacity: 1,
+      color: "white",
+      dashArray: "3",
+      fillOpacity: 0.7
+    };
+  }*/
 }
