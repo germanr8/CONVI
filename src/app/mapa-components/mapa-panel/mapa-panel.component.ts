@@ -15,7 +15,7 @@ export class MapaPanelComponent implements OnInit {
   cifraRoboAutos;
   cifraSecuestros;
   alcaldiasDatos;
-  estilo;
+  alcaldiaID;
   geojsonMarkerOptions = {
     radius: 8,
     fillColor: "#ff7800",
@@ -69,7 +69,9 @@ export class MapaPanelComponent implements OnInit {
 
     function zoomToFeature(e) {
       map.fitBounds(e.target.getBounds());
-      console.log(e.target.feature.properties.cve_mun);
+      this.alcaldiaID = e.target.feature.properties.cve_mun;
+      document.getElementById("myText").innerHTML = this.alcaldiaID;
+      console.log(this.alcaldiaID);
     }
 
     function onEachFeature(feature, layer) {
