@@ -46,18 +46,81 @@ export class MapaPanelComponent implements OnInit {
     setTimeout(() => {
       map.invalidateSize();
     }, 0);
-    //var myLayer = L.geoJSON().addTo(map);
 
-    L.geoJSON(await this.alcaldiasDatos, {
-      style: function(feature) {
-        switch (feature.properties.cve_mun) {
-          case "002":
-            return { color: "#ff0000" };
-          case "003":
-            return { color: "#0000ff" };
-        }
+    var alcaldias;
+
+    function highlightFeature(e) {
+      var layer = e.target;
+
+      layer.setStyle({
+        weight: 5,
+        color: "#94dee3",
+        dashArray: "",
+        fillOpacity: 0.7
+      });
+
+      if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+        layer.bringToFront();
       }
+    }
+    function resetHighlight(e) {
+      alcaldias.resetStyle(e.target);
+    }
+
+    function zoomToFeature(e) {
+      map.fitBounds(e.target.getBounds());
+      console.log(e.target.feature.properties.cve_mun);
+    }
+
+    function onEachFeature(feature, layer) {
+      if (feature.properties && feature.properties.cve_mun) {
+        layer.bindPopup(feature.properties.cve_mun);
+      }
+      layer.on({
+        mouseover: highlightFeature,
+        mouseout: resetHighlight,
+        click: zoomToFeature
+      });
+    }
+    function style(feature) {
+      switch (feature.properties.cve_mun) {
+        case "002":
+          return { color: "#870505" };
+        case "003":
+          return { color: "#873305" };
+        case "004":
+          return { color: "#875105" };
+        case "005":
+          return { color: "#877c05" };
+        case "006":
+          return { color: "#6b8705" };
+        case "007":
+          return { color: "#378705" };
+        case "008":
+          return { color: "#058774" };
+        case "009":
+          return { color: "#057187" };
+        case "010":
+          return { color: "#055387" };
+        case "011":
+          return { color: "#052e87" };
+        case "012":
+          return { color: "#280587" };
+        case "013":
+          return { color: "#570587" };
+        case "014":
+          return { color: "#710587" };
+        case "015":
+          return { color: "#87055e" };
+        case "016":
+          return { color: "#870532" };
+        case "017":
+          return { color: "#87051d" };
+      }
+    }
+    alcaldias = L.geoJSON(await this.alcaldiasDatos, {
+      onEachFeature: onEachFeature,
+      style: style
     }).addTo(map);
-    //myLayer.addData(await this.alcaldiasDatos);
   }
 }
