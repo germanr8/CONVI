@@ -76,7 +76,7 @@ export class MapaPanelComponent implements OnInit {
 
     function onEachFeature(feature, layer) {
       if (feature.properties && feature.properties.cve_mun) {
-        layer.bindPopup(feature.properties.cve_mun);
+        layer.bindPopup(feature.properties.nomgeo);
       }
       layer.on({
         mouseover: highlightFeature,
