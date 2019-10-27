@@ -7,7 +7,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; // Import Bootstrap widg
 import { LeafletModule } from '@asymmetrik/ngx-leaflet'; // Import Leaflet ngx module
 import { AppRoutingModule } from './app-routing.module'; // Routing module import
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // Animations module import
-
+import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { ChartsModule } from 'ng2-charts';
 // Services
 import { AlertasService } from './services/alertas.service';
 import { MapaService } from './services/mapa.service';
@@ -23,6 +24,9 @@ import { ReportesPanelComponent } from './reportes-components/reportes-panel/rep
 import { ReportesComponent } from './reportes/reportes.component';
 import { AmberComponent } from './amber/amber.component';
 import { AmberPanelComponent } from './amber-components/amber-panel/amber-panel.component';
+import { FooterComponent } from './footer/footer.component';
+import { BannerCarouselComponent } from './inicio-components/banner-carousel/banner-carousel.component';
+import { GraficaComponent } from './inicio-components/grafica/grafica.component';
 
 const routes: Routes = [
   {
@@ -68,7 +72,10 @@ const routes: Routes = [
     ReportesPanelComponent,
     ReportesComponent,
     AmberComponent,
-    AmberPanelComponent
+    AmberPanelComponent,
+    FooterComponent,
+    BannerCarouselComponent,
+    GraficaComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +86,9 @@ const routes: Routes = [
     LeafletModule, // Add for Leaflet
     ReactiveFormsModule,
     FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    CarouselModule.forRoot(),
+    ChartsModule
   ],
   exports: [RouterModule, FormsModule, ReactiveFormsModule],
   // Services list

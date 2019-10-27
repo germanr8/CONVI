@@ -1,0 +1,42 @@
+$breakpoint-md: 768px;
+$breakpoint-lg: 990px;
+
+.carousel img {
+  max-height: 250px !important;
+  margin: 0 auto;
+}
+
+.carousel {
+  margin-bottom: 2%;
+}
+
+.carousel-control {
+  display: none !important;
+}
+
+.banner {
+  margin-bottom: 2%;
+  filter: alpha(opacity=50); /* For IE8 and earlier */
+}
+
+.main-subtitle {
+  color: white;
+  border-radius: 4px;
+  -webkit-text-stroke-width: 1.5px;
+  -webkit-text-stroke-color: black;
+}
+
+.convi-title {
+  color: #5f9ea0;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+  font-size: 5.5rem;
+}
+
+@media (max-width: $breakpoint-md) {
+  .carousel img {
+    min-height: 280px;
+    max-height: 280px;
+    margin: 0 auto;
+  }
+}
