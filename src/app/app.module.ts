@@ -27,6 +27,7 @@ import { AmberPanelComponent } from "./amber-components/amber-panel/amber-panel.
 import { FooterComponent } from "./footer/footer.component";
 import { BannerCarouselComponent } from "./inicio-components/banner-carousel/banner-carousel.component";
 import { GraficaComponent } from "./inicio-components/grafica/grafica.component";
+import { UltimosReportesComponent } from "./inicio-components/ultimos-reportes/ultimos-reportes.component";
 import { LoginComponent } from "./login/login.component";
 
 const routes: Routes = [
@@ -82,6 +83,7 @@ const routes: Routes = [
     FooterComponent,
     BannerCarouselComponent,
     GraficaComponent,
+    UltimosReportesComponent,
     LoginComponent
   ],
   imports: [

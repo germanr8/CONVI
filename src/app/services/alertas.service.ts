@@ -33,6 +33,7 @@ export class AlertasService {
 
   getAlertasRecientes() {
     /* WARNING: Cambiar! Está hardcodeado!! */
+
     /* Este servicio se tendrá que cambiar para conseguir las 
     3 imágenes más recientes de reportes de alerta Amber, la idea
     es que se consigan de una base de datos */
@@ -41,5 +42,10 @@ export class AlertasService {
     let ph3 = '../../../assets/img/ejem_alerta_amber3.jpg';
     this.recentImages = [ph1, ph2, ph3];
     return this.recentImages;
+  }
+
+  getCantidadAlertas() {
+    /* WARNING: Cambiar! Está hardcodeado!! */
+    return Math.floor(Math.random() * 5) + 2;
   }
 }

@@ -23,21 +23,35 @@ $blackBorder: 1px solid rgba(0, 0, 0, 0.125);
   }
 }
 
-.carousel-inner {
-  img {
-    margin: auto;
-    width: 33%;
-    height: auto;
+.last-report {
+  padding: 1.5%;
+  .panel-body {
+    padding: 0px;
   }
-}
+  .list-group {
+    margin-bottom: 0;
+  }
+  .panel-title {
+    display: inline;
+  }
+  .label-info {
+    float: right;
+  }
+  li.list-group-item {
+    border-radius: 0;
+    border: 0;
+    border-top: 1px solid #ddd;
+  }
 
-@media (max-width: $breakpoint-md) {
-  .carousel-inner {
-    img {
-      margin: auto;
-      width: 80%;
-      height: auto;
-    }
+  .mic-info {
+    color: #666666;
+    font-size: 11px;
+  }
+  .action {
+    margin-top: 5px;
+  }
+  .comment-text {
+    font-size: 12px;
   }
 }
 
