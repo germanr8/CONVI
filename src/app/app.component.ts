@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
-import { slideInAnimation } from '../app/animations/animations';
+import { Component } from "@angular/core";
+import { slideInAnimation } from "../app/animations/animations";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.scss"],
   animations: [slideInAnimation]
 })
 export class AppComponent {
-  title = 'convi';
+  title = "convi";
 }

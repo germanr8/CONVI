@@ -1,0 +1,70 @@
+<div class="col-md-6 offset-md-3 mt-5">
+  <div class="alert alert-info" [hidden]="acceso">
+    Correo: prueba@gmail.com<br />
+    Contraseña: qwerty123
+  </div>
+  <div class="card" [hidden]="acceso">
+    <h4 class="card-header">Inicio Sesion</h4>
+    <div class="card-body">
+      <form #formulario="ngForm">
+        <div class="form-group">
+          <label for="correo">Correo</label>
+          <input
+            type="text"
+            class="form-control"
+            id="correo"
+            name="correo"
+            placeholder="ejemplo@gmail.com"
+            [(ngModel)]="usuario.correo"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="contrasenia">Contraseña</label>
+          <input
+            type="password"
+            class="form-control"
+            id="contrasenia"
+            name="contrasenia"
+            placeholder="Contraseña"
+            [(ngModel)]="usuario.contrasenia"
+          />
+        </div>
+        <div [hidden]="registrado">
+          Cuenta no registrada, intente otro correo o contraseña
+        </div>
+        <button
+          type="submit"
+          class="btn btn-danger"
+          (click)="enviarFormulario()"
+        >
+          Enviar
+        </button>
+      </form>
+    </div>
+  </div>
+  <div class="card" [hidden]="!acceso">
+    <h4 class="card-header">Cuenta</h4>
+    <div class="card-body">
+      <div>
+        <label for="correo">Correo: {{ usuario.correo }}</label>
+      </div>
+
+      <div>
+        <label for="contrasenia">Nombre: {{ usuario.nombre }}</label>
+      </div>
+
+      <div>
+        <label for="contrasenia">Apellido: {{ usuario.apellido }}</label>
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-danger"
+        (click)="logOut(); formulario.reset()"
+      >
+        Log out
+      </button>
+    </div>
+  </div>
+</div>

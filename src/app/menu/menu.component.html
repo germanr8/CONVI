@@ -1,5 +1,8 @@
 <!--Navbar -->
-<nav class="mb-1 navbar navbar-expand-sm navbar-dark bg-dark sticky-top">
+<nav
+  class="mb-1 navbar navbar-expand-sm navbar-dark bg-dark sticky-top"
+  (click)="user()"
+>
   <a class="navbar-brand" href="#">CONVI</a>
   <button
     class="navbar-toggler"
@@ -58,7 +61,7 @@
     </ul>
     <ul class="navbar-nav ml-auto nav-flex-icons">
       <li class="nav-item avatar">
-        <a class="nav-link p-0">
+        <a class="nav-link p-0" routerLink="login" routerLinkActive="active">
           <img
             src="../../assets/img/avatar_ph.png"
             class="rounded-circle z-depth-0"
@@ -67,6 +70,7 @@
           />
         </a>
       </li>
+      <li class="nav-link" [hidden]="!hello">Hola: {{ usuario.nombre }}</li>
     </ul>
   </div>
 </nav>
