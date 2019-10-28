@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ChartOptions } from 'chart.js';
+import { Label } from 'ng2-charts';
 import { ReportesService } from '../../services/reportes.service';
 import { AlertasService } from '../../services/alertas.service';
 /* Tutorial de:
@@ -18,6 +20,19 @@ export class GraficaComponent implements OnInit {
   public pieChartLabels = ['Reportes', 'Reacciones', 'Alertas'];
   public pieChartData = [];
   public pieChartType = 'pie';
+  public pieChartLegend = true;
+  public pieChartColors = [
+    {
+      backgroundColor: [
+        'rgba(78, 205, 196, 1)',
+        'rgba(200, 247, 197, 1)',
+        'rgba(135, 211, 124, 1)'
+      ]
+    }
+  ];
+  public pieChartOptions: ChartOptions = {
+    responsive: true
+  };
 
   constructor(
     private reportesService: ReportesService,
