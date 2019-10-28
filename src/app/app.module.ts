@@ -15,6 +15,7 @@ import { JwtInterceptor, ErrorInterceptor } from "./_helpers";
 import { AlertasService } from "./services/alertas.service";
 import { MapaService } from "./services/mapa.service";
 import { ReportesService } from "./services/reportes.service";
+import { UsuariosService } from "../app/services/usuarios.service";
 // Components
 import { AppComponent } from "./app.component";
 import { MenuComponent } from "./menu/menu.component";
