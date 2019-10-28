@@ -1,1 +1,19 @@
-<p>grafica works!</p>
+<div class="row">
+  <div class="col-lg-1 col-md-12 align-self-center card-col ">
+    <div class="headline-card bg-light text-center">
+      <div class="card-body headline text-center">Actividad</div>
+    </div>
+  </div>
+  <!--Reportes-->
+  <div class="last-report col-lg-11 col-md-12 bg-dark text-center">
+    <div *ngIf="isDataAvailable" style="display: block">
+      <canvas
+        baseChart
+        [data]="pieChartData"
+        [labels]="pieChartLabels"
+        [chartType]="pieChartType"
+      ></canvas>
+    </div>
+  </div>
+  <!--/Reportes-->
+</div>

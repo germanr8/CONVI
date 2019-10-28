@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-lg-1 col-md-12 align-self-center card-col ">
+    <div class="headline-card bg-light text-center">
+      <div class="card-body headline text-center">Reportes</div>
+    </div>
+  </div>
+  <!--Reportes-->
+  <div class="last-report col-lg-11 col-md-12 bg-dark text-center">
+    <ul class="list-group">
+      <li *ngFor="let reporte of reportes" class="list-group-item">
+        <div>
+          <h6>{{ reporte.titulo }}</h6>
+          <div class="mic-info">
+            Por: <span class="text-convi">Anónimo</span> {{ reporte.fecha
+            }}<br />
+            Alcaldía: <span class="text-convi">{{ reporte.alcaldia }}</span
+            ><br />
+            Dirección:
+            <span class="text-convi">{{ reporte.direccion }}</span>
+          </div>
+        </div>
+        <div class="comment-text">
+          {{ reporte.descripcion }}
+        </div>
+        <div class="action text-right">
+          <button
+            type="button"
+            class="btn btn-transparent btn-xs"
+            title="Añadir comentario"
+          >
+            <small><span class="add-comment">😧</span></small>
+          </button>
+          <button
+            type="button"
+            class="btn btn-transparent btn-xs"
+            title="Añadir comentario"
+          >
+            <small><span class="add-comment">😡</span></small>
+          </button>
+          <button
+            type="button"
+            class="btn btn-transparent btn-xs"
+            title="Añadir comentario"
+          >
+            <small><span class="add-comment">😢</span></small>
+          </button>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <!--/Reportes-->
+</div>
