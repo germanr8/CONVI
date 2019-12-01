@@ -9,6 +9,7 @@ import { AppRoutingModule } from "./app-routing.module"; // Routing module impor
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations"; // Animations module import
 import { CarouselModule } from "ngx-bootstrap/carousel";
 import { ChartsModule } from "ng2-charts";
+import { HttpClientModule } from "@angular/common/http"; // HTTP Client
 // Services
 import { AlertasService } from "./services/alertas.service";
 import { MapaService } from "./services/mapa.service";
@@ -88,6 +89,7 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     RouterModule.forRoot(routes), // Add for router
     NgbModule, // Add for Bootstrap widgets

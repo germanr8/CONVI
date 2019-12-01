@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { ReportesService } from '../../services/reportes.service';
-import { Reporte } from '../../models/Reporte';
+import { Component, OnInit } from "@angular/core";
+import { ReportesService } from "../../services/reportes.service";
+import { Reporte } from "../../models/Reporte";
 
 @Component({
-  selector: 'app-ultimos-reportes',
-  templateUrl: './ultimos-reportes.component.html',
-  styleUrls: ['./ultimos-reportes.component.scss']
+  selector: "app-ultimos-reportes",
+  templateUrl: "./ultimos-reportes.component.html",
+  styleUrls: ["./ultimos-reportes.component.scss"]
 })
 export class UltimosReportesComponent implements OnInit {
-  reportes: Reporte[] = [];
+  reportes: any;
   constructor(private reportesService: ReportesService) {}
 
-  ngOnInit() {
-    this.reportes = this.reportesService.getUltimosReportes();
+  async ngOnInit() {
+    this.reportes = await this.reportesService.getUltimosReportes();
   }
 }
