@@ -90,6 +90,7 @@
   >
     <form
       [formGroup]="reporteForm"
+      (ngSubmit)="enviarReporte()"
       class="bg-light report-form text-center"
       novalidate
     >
@@ -119,22 +120,22 @@
           Se requiere título
         </div>
       </div>
-      <!-- Anonimato -->
+      <!-- autor -->
       <div class="form-group">
         <div class="d-block my-3">
-          <label class="center-block font-weight-bold">Anonimato</label>
+          <label class="center-block font-weight-bold">Autor</label>
           <div class="custom-control custom-radio">
             <input
               id="noanonimo"
               type="radio"
               class="custom-control-input"
-              value="noanonimo"
-              name="anonimato"
-              formControlName="anonimato"
+              value="{{ currentUser.nombre + ' ' + currentUser.apellido }}"
+              name="autor"
+              formControlName="autor"
             />
-            <label class="custom-control-label" for="noanonimo"
-              >Enviar con nombre</label
-            >
+            <label class="custom-control-label" for="noanonimo">{{
+              currentUser.nombre + " " + currentUser.apellido
+            }}</label>
           </div>
 
           <div class="custom-control custom-radio">
@@ -142,9 +143,9 @@
               id="anonimo"
               type="radio"
               class="custom-control-input"
-              value="anonimo"
-              name="anonimato"
-              formControlName="anonimato"
+              value="Anónimo"
+              name="autor"
+              formControlName="autor"
             />
             <label class="custom-control-label" for="anonimo"
               >Enviar de forma anónima</label
@@ -154,13 +155,13 @@
       </div>
       <div
         *ngIf="
-          reporteForm.controls['anonimato'].invalid &&
-          (reporteForm.controls['anonimato'].dirty ||
-            reporteForm.controls['anonimato'].touched)
+          reporteForm.controls['autor'].invalid &&
+          (reporteForm.controls['autor'].dirty ||
+            reporteForm.controls['autor'].touched)
         "
         class="alert alert-danger"
       >
-        <div *ngIf="reporteForm.controls['anonimato'].errors.required">
+        <div *ngIf="reporteForm.controls['autor'].errors.required">
           Se requiere elegir una forma de envío
         </div>
       </div>

@@ -210,6 +210,15 @@ export class ReportesService {
     }
   }
 
+  async publicarReporte(body: FormData) {
+    console.log(body);
+    let postReporteURL = this.server + "/reportes";
+    await this.http.post(postReporteURL, body).subscribe(
+      response => console.log(response),
+      error => console.log(error)
+    );
+  }
+
   getCifraHomicidios(alcaldiaID: string) {
     /* WARNING: Cambiar! Está hardcodeado!! */
     switch (alcaldiaID) {

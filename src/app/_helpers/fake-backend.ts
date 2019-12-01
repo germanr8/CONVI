@@ -13,10 +13,10 @@ import { delay, mergeMap, materialize, dematerialize } from "rxjs/operators";
 const users: any[] = [
   {
     id: 1,
-    username: "test",
+    username: "german.reyga@gmail.com",
     password: "test",
-    nombre: "Test",
-    apellido: "User"
+    nombre: "Germán",
+    apellido: "Reyes"
   }
 ];
 

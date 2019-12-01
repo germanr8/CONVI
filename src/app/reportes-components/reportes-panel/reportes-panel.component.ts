@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { ReportesService } from "../../services/reportes.service";
 import { Reporte } from "../../models/Reporte";
+import { AuthenticationService } from "../../services/authentication.service";
+import { Usuario } from "src/app/models/Usuario";
 
 @Component({
   selector: "app-reportes-panel",
@@ -9,6 +11,7 @@ import { Reporte } from "../../models/Reporte";
   styleUrls: ["./reportes-panel.component.scss"]
 })
 export class ReportesPanelComponent implements OnInit {
+  currentUser;
   showReportes: boolean;
   showFormulario: boolean;
   reporteForm: FormGroup;
@@ -34,14 +37,15 @@ export class ReportesPanelComponent implements OnInit {
   ];
   constructor(
     private formBuilder: FormBuilder,
-    private reportesService: ReportesService
+    private reportesService: ReportesService,
+    private authenticationService: AuthenticationService
   ) {
     this.showReportes = true;
     this.showFormulario = false;
 
     this.reporteForm = this.formBuilder.group({
       titulo: ["", Validators.required],
-      anonimato: ["", Validators.required],
+      autor: ["", Validators.required],
       alcaldia: ["", Validators.required],
       direccion: ["", Validators.required],
       descripcion: ["", Validators.required]
@@ -49,7 +53,24 @@ export class ReportesPanelComponent implements OnInit {
   }
 
   async ngOnInit() {
+    this.currentUser = this.authenticationService.currentUserValue;
+    console.log(this.currentUser);
     this.reportes = await this.reportesService.getTodosReportes();
+  }
+
+  get f() {
+    return this.reporteForm.controls;
+  }
+
+  enviarReporte() {
+    var formData: any = new FormData();
+    formData.append("titulo", this.reporteForm.get("titulo").value);
+    formData.append("autor", this.reporteForm.get("autor").value);
+    formData.append("alcaldia", this.reporteForm.get("alcaldia").value);
+    formData.append("direccion", this.reporteForm.get("direccion").value);
+    formData.append("descripcion", this.reporteForm.get("descripcion").value);
+    this.reportesService.publicarReporte(this.reporteForm.value);
+    console.log("enviado");
   }
 
   mostrarReportes() {
