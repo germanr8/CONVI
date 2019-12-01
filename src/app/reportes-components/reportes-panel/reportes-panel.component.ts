@@ -11,6 +11,7 @@ import { Usuario } from "src/app/models/Usuario";
   styleUrls: ["./reportes-panel.component.scss"]
 })
 export class ReportesPanelComponent implements OnInit {
+  reporteResult;
   currentUser;
   showReportes: boolean;
   showFormulario: boolean;
@@ -70,7 +71,7 @@ export class ReportesPanelComponent implements OnInit {
     formData.append("direccion", this.reporteForm.get("direccion").value);
     formData.append("descripcion", this.reporteForm.get("descripcion").value);
     this.reportesService.publicarReporte(this.reporteForm.value);
-    console.log("enviado");
+    this.reporteForm.reset();
   }
 
   mostrarReportes() {
