@@ -9,7 +9,9 @@ import { AppRoutingModule } from "./app-routing.module"; // Routing module impor
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations"; // Animations module import
 import { CarouselModule } from "ngx-bootstrap/carousel";
 import { ChartsModule } from "ng2-charts";
-import { HttpClientModule } from "@angular/common/http"; // HTTP Client
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http"; // HTTP Client
+import { fakeBackendProvider } from "./_helpers";
+import { JwtInterceptor, ErrorInterceptor } from "./_helpers";
 // Services
 import { AlertasService } from "./services/alertas.service";
 import { MapaService } from "./services/mapa.service";
@@ -103,7 +105,16 @@ const routes: Routes = [
   ],
   exports: [RouterModule, FormsModule, ReactiveFormsModule],
   // Services list
-  providers: [AlertasService, MapaService, ReportesService],
+  providers: [
+    AlertasService,
+    MapaService,
+    ReportesService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+
+    // provider used to create fake backend
+    fakeBackendProvider
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

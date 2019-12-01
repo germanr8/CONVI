@@ -59,7 +59,7 @@
         >
       </li>
     </ul>
-    <ul class="navbar-nav ml-auto nav-flex-icons">
+    <ul *ngIf="!userExists" class="navbar-nav ml-auto nav-flex-icons">
       <li class="nav-item avatar">
         <a class="nav-link p-0" routerLink="login" routerLinkActive="active">
           <img
@@ -70,7 +70,11 @@
           />
         </a>
       </li>
-      <li class="nav-link" [hidden]="!hello">Hola: {{ usuario.nombre }}</li>
+    </ul>
+    <ul *ngIf="userExists" class="navbar-nav ml-auto nav-flex-icons">
+      <li>
+        <a class="btn btn-convi text-white" (click)="logout()">Logout</a>
+      </li>
     </ul>
   </div>
 </nav>

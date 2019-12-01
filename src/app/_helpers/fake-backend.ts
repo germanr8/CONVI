@@ -10,13 +10,11 @@ import {
 import { Observable, of, throwError } from "rxjs";
 import { delay, mergeMap, materialize, dematerialize } from "rxjs/operators";
 
-import { Usuario } from "../models/Usuario";
-
-const users: Usuario[] = [
+const users: any[] = [
   {
     id: 1,
-    correo: "test",
-    contrasenia: "test",
+    username: "test",
+    password: "test",
     nombre: "Test",
     apellido: "User"
   }
@@ -52,14 +50,15 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     // route functions
 
     function authenticate() {
-      const { correo, contrasenia } = body;
+      console.log("authenticating..");
+      const { username, password } = body;
       const user = users.find(
-        x => x.correo === correo && x.contrasenia === contrasenia
+        x => x.username === username && x.password === password
       );
-      if (!user) return error("correo or contrasenia is incorrect");
+      if (!user) return error("username or password is incorrect");
       return ok({
         id: user.id,
-        correo: user.correo,
+        username: user.username,
         nombre: user.nombre,
         apellido: user.apellido,
         token: "fake-jwt-token"

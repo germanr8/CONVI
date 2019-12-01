@@ -1,43 +1,66 @@
 import { Component, OnInit } from "@angular/core";
-import { UsuariosService } from "../services/usuarios.service";
-import { Usuario } from "../models/Usuario";
+import { Router, ActivatedRoute } from "@angular/router";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { first } from "rxjs/operators";
+import { AuthenticationService } from "../services/authentication.service";
 
-@Component({
-  selector: "app-login",
-  templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.scss"]
-})
+@Component({ templateUrl: "login.component.html" })
 export class LoginComponent implements OnInit {
-  registrado: boolean = true;
-  acceso: boolean;
-  usuario: Usuario;
-  constructor(private usuariosService: UsuariosService) {
-    this.acceso = this.usuariosService.getLoggeado();
+  loginForm: FormGroup;
+  loading = false;
+  submitted = false;
+  returnUrl: string;
+  error = "";
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private authenticationService: AuthenticationService
+  ) {
+    // redirect to home if already logged in
+    if (this.authenticationService.currentUserValue) {
+      this.router.navigate(["/"]);
+    }
   }
 
   ngOnInit() {
-    if (this.usuariosService.getLoggeado() == true) {
-      this.usuario = this.usuariosService.getUsuario();
-    } else {
-      this.usuario = new Usuario();
-    }
+    this.loginForm = this.formBuilder.group({
+      username: ["", Validators.required],
+      password: ["", Validators.required]
+    });
+
+    // get return url from route parameters or default to '/'
+    this.returnUrl = this.route.snapshot.queryParams["returnUrl"] || "/";
   }
-  enviarFormulario() {
-    if (
-      this.usuariosService.getCorreo() == this.usuario.correo &&
-      this.usuariosService.getContrasenia() == this.usuario.contrasenia
-    ) {
-      this.registrado = true;
-      this.acceso = true;
-      this.usuariosService.setLoggeado(this.acceso);
-      this.usuario = this.usuariosService.getUsuario();
-    } else {
-      this.registrado = false;
-    }
+
+  // convenience getter for easy access to form fields
+  get f() {
+    return this.loginForm.controls;
   }
-  logOut() {
-    this.acceso = false;
-    this.usuariosService.setLoggeado(this.acceso);
-    this.usuario = new Usuario();
+
+  onSubmit() {
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.loginForm.invalid) {
+      return;
+    }
+
+    this.loading = true;
+    this.authenticationService
+      .login(this.f.username.value, this.f.password.value)
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.router.navigate([this.returnUrl]);
+
+          window.location.reload();
+        },
+        error => {
+          this.error = "Error: usuario o contraseña incorrectos";
+          this.loading = false;
+        }
+      );
   }
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { UsuariosService } from "../services/usuarios.service";
+import { Router } from "@angular/router";
 import { Usuario } from "src/app/models/Usuario";
+import { AuthenticationService } from "../services/authentication.service";
 
 @Component({
   selector: "app-menu",
@@ -8,6 +10,8 @@ import { Usuario } from "src/app/models/Usuario";
   styleUrls: ["./menu.component.scss"]
 })
 export class MenuComponent implements OnInit {
+  userExists: boolean = false;
+  currentUser: Usuario;
   navbarOpen = false;
   statusInicio = false;
   statusMapa = false;
@@ -15,11 +19,32 @@ export class MenuComponent implements OnInit {
   statusAmber = false;
   usuario: Usuario;
   hello: boolean;
-  constructor(public usuariosService: UsuariosService) {}
+  constructor(
+    public usuariosService: UsuariosService,
+    private router: Router,
+    private authenticationService: AuthenticationService
+  ) {
+    this.authenticationService.currentUser.subscribe(
+      x => (this.currentUser = x)
+    );
+  }
 
   ngOnInit() {
-    this.usuario = new Usuario();
+    if (this.currentUser) {
+      this.userExists = true;
+    } else {
+      this.userExists = false;
+    }
   }
+
+  ngOnChange() {
+    if (this.currentUser) {
+      this.userExists = true;
+    } else {
+      this.userExists = false;
+    }
+  }
+
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;
   }
@@ -36,13 +61,9 @@ export class MenuComponent implements OnInit {
     if (seleccion == "Amber") this.statusAmber = true;
   }
 
-  user() {
-    if (this.usuariosService.getLoggeado() == true) {
-      this.usuario = this.usuariosService.getUsuario();
-      this.hello = true;
-    } else {
-      this.usuario = new Usuario();
-      this.hello = false;
-    }
+  logout() {
+    this.userExists = false;
+    this.authenticationService.logout();
+    this.router.navigate(["/login"]);
   }
 }
