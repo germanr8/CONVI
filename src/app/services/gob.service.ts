@@ -16,13 +16,12 @@ export class GobService {
   async getCrimenes(alcaldia: string) {
     let alcaldiaS = this.queAlcaldia(alcaldia);
     let violacion = "&refine.categoria_delito=VIOLACIÓN";
-
-    await this.http.get(this.GobURL + alcaldiaS + violacion).subscribe(data => {
-      console.log("DATA");
-      console.log(data["nhits"]);
-      this.datosV = data["nhits"];
-    });
-
+    let data = await this.http
+      .get(this.GobURL + alcaldiaS + violacion)
+      .toPromise();
+    this.datosV = data["nhits"];
+    console.log(this.datosV);
+    console.log("ME LA PELAS");
     return this.datosV;
   }
 

@@ -76,7 +76,7 @@ export class MapaPanelComponent implements OnInit {
     Se pone para detectar cambios en las variables de Angular, ya que el codigo de esta funcion
     cae fuera de la NgZone y no se detecta de forma automática, hay que actualizarla nosotros mismos
     */
-    const zoomToFeature = e => {
+    const zoomToFeature = async e => {
       // Hacer zoom donde se hizo click en el mapa
       // map.fitBounds(e.target.getBounds());
       this.alcaldiaID = e.target.feature.properties.cve_mun;
@@ -84,12 +84,12 @@ export class MapaPanelComponent implements OnInit {
       this.reportes = this.reportesService.getReportesRecientes(
         this.alcaldiaID
       );
-      console.log(this.reportes);
 
       this.cifraHomicidios = this.reportesService.getCifraHomicidios(
         this.alcaldiaID
       );
-      console.log(this.Gob.getCrimenes(this.alcaldiaID));
+      let data = await this.Gob.getCrimenes(this.alcaldiaID);
+      console.log(data);
       this.cifraRoboAutos = this.reportesService.getCifraRoboAutos(
         this.alcaldiaID
       );
