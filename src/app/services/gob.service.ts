@@ -13,11 +13,12 @@ export class GobService {
     "https://datos.cdmx.gob.mx/api/records/1.0/search/?dataset=carpetas-de-investigacion-pgj-de-la-ciudad-de-mexico&rows=10&facet=ao_hechos&facet=delito&facet=categoria_delito&facet=alcaldia_hechos&refine.ao_hechos=2019&refine.alcaldia_hechos=";
   constructor(private http: HttpClient) {}
 
-  getCrimenes(alcaldia: string) {
+  async getCrimenes(alcaldia: string) {
     let alcaldiaS = this.queAlcaldia(alcaldia);
     let violacion = "&refine.categoria_delito=VIOLACIÓN";
 
-    this.http.get(this.GobURL + alcaldiaS + violacion).subscribe(data => {
+    await this.http.get(this.GobURL + alcaldiaS + violacion).subscribe(data => {
+      console.log("DATA");
       console.log(data["nhits"]);
       this.datosV = data["nhits"];
     });
