@@ -24,14 +24,24 @@ export class ReportesService {
   }
 
   async getTodosReportes(order: String) {
-    let todosReportesURL =
-      this.server +
-      "/reportes?filter[order]=_id%20" +
-      order +
-      "&filter[limit]=20&filter[skip]=0";
-    let data = await this.http.get<Reporte[]>(todosReportesURL).toPromise();
-    this.todosReportes = data;
-    return this.todosReportes;
+    let todosReportesURL;
+    if (order == "ALC") {
+      todosReportesURL =
+        this.server +
+        "/reportes?filter[order]=alcaldia ASC&filter[limit]=50&filter[skip]=0";
+      let data = await this.http.get<Reporte[]>(todosReportesURL).toPromise();
+      this.todosReportes = data;
+      return this.todosReportes;
+    } else {
+      todosReportesURL =
+        this.server +
+        "/reportes?filter[order]=_id%20" +
+        order +
+        "&filter[limit]=50&filter[skip]=0";
+      let data = await this.http.get<Reporte[]>(todosReportesURL).toPromise();
+      this.todosReportes = data;
+      return this.todosReportes;
+    }
   }
 
   getReportesRecientes(alcaldiaID: string) {

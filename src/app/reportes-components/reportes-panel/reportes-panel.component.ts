@@ -56,15 +56,13 @@ export class ReportesPanelComponent implements OnInit {
 
   async ngOnInit() {
     this.currentUser = this.authenticationService.currentUserValue;
-    console.log(this.currentUser);
+    //console.log(this.currentUser);
     this.reportes = await this.reportesService.getTodosReportes(this.order);
   }
 
   async cambiarOrden(value) {
-    console.log(<string>value);
     this.order = <string>value;
     this.reportes = await this.reportesService.getTodosReportes(this.order);
-    console.log(this.reportes);
   }
 
   get f() {
