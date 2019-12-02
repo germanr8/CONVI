@@ -12,9 +12,9 @@ import * as L from "leaflet";
 })
 export class MapaPanelComponent implements OnInit {
   options;
-  cifraHomicidios;
-  cifraRoboAutos;
+  cifraViolaciones;
   cifraSecuestros;
+  cifraRoboAutos;
   alcaldiasDatos;
   alcaldiaID;
   reportes: Reporte[] = [];
@@ -38,7 +38,7 @@ export class MapaPanelComponent implements OnInit {
     los datos de toda la CDMX y después cambie dependiendo de la alcaldía que se eliga */
     this.options = this.mapaService.construirMapa();
     this.alcaldiasDatos = this.mapaService.getAlcaldiasDatos();
-    this.cifraHomicidios = "~";
+    this.cifraViolaciones = "~";
     this.cifraRoboAutos = "~";
     this.cifraSecuestros = "~";
   }
@@ -50,7 +50,7 @@ export class MapaPanelComponent implements OnInit {
 
     var alcaldias;
 
-    function highlightFeature(e) {
+    function sobresaltarAlcaldia(e) {
       var layer = e.target;
 
       layer.setStyle({
@@ -64,7 +64,7 @@ export class MapaPanelComponent implements OnInit {
         layer.bringToFront();
       }
     }
-    function resetHighlight(e) {
+    function eliminarResaltado(e) {
       alcaldias.resetStyle(e.target);
     }
 
@@ -76,7 +76,7 @@ export class MapaPanelComponent implements OnInit {
     Se pone para detectar cambios en las variables de Angular, ya que el codigo de esta funcion
     cae fuera de la NgZone y no se detecta de forma automática, hay que actualizarla nosotros mismos
     */
-    const zoomToFeature = async e => {
+    const clickOnAlcaldia = async e => {
       // Hacer zoom donde se hizo click en el mapa
       // map.fitBounds(e.target.getBounds());
       this.alcaldiaID = e.target.feature.properties.cve_mun;
@@ -85,17 +85,10 @@ export class MapaPanelComponent implements OnInit {
         this.alcaldiaID
       );
 
-      this.cifraHomicidios = this.reportesService.getCifraHomicidios(
-        this.alcaldiaID
-      );
-      let data = await this.Gob.getCrimenes(this.alcaldiaID);
-      console.log(data);
-      this.cifraRoboAutos = this.reportesService.getCifraRoboAutos(
-        this.alcaldiaID
-      );
-      this.cifraSecuestros = this.reportesService.getCifraSecuestros(
-        this.alcaldiaID
-      );
+      this.cifraViolaciones = await this.Gob.getViolacion(this.alcaldiaID);
+      this.cifraSecuestros = await this.Gob.getSecuestro(this.alcaldiaID);
+      this.cifraRoboAutos = await this.Gob.getRoboAuto(this.alcaldiaID);
+
       // Detectar cambios de forma manual
       this.changeDetectorRef.detectChanges();
     };
@@ -105,9 +98,9 @@ export class MapaPanelComponent implements OnInit {
         layer.bindPopup(feature.properties.nomgeo);
       }
       layer.on({
-        mouseover: highlightFeature,
-        mouseout: resetHighlight,
-        click: zoomToFeature
+        mouseover: sobresaltarAlcaldia,
+        mouseout: eliminarResaltado,
+        click: clickOnAlcaldia
       });
     }
     function style(feature) {
