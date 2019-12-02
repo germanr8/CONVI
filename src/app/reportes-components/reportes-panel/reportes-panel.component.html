@@ -35,10 +35,13 @@
     class="report-panel col-md-8 bg-dark report-section rounded-right"
   >
     <label class="center-block text-white">Ordenar por: </label>
-    <select class="browser-default custom-select">
+    <select
+      class="browser-default custom-select"
+      (change)="cambiarOrden($event.target.value)"
+    >
       <option selected disabled>-- Orden --</option>
-      <option value="1">Fecha</option>
-      <option value="2">Alcaldía</option>
+      <option value="DESC">Fecha (más recientes primero)</option>
+      <option value="ASC">Fecha (más antiguos primero)</option>
     </select>
     <ul class="list-group">
       <li *ngFor="let reporte of reportes" class="list-group-item">

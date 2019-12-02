@@ -23,10 +23,12 @@ export class ReportesService {
     return this.ultimosReportes;
   }
 
-  async getTodosReportes() {
+  async getTodosReportes(order: String) {
     let todosReportesURL =
       this.server +
-      "/reportes?filter[offset]=0&filter[limit]=100&filter[skip]=0";
+      "/reportes?filter[order]=_id%20" +
+      order +
+      "&filter[limit]=20&filter[skip]=0";
     let data = await this.http.get<Reporte[]>(todosReportesURL).toPromise();
     this.todosReportes = data;
     return this.todosReportes;

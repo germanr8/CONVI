@@ -17,6 +17,13 @@ const users: any[] = [
     password: "test",
     nombre: "Germán",
     apellido: "Reyes"
+  },
+  {
+    id: 2,
+    username: "test@test.com",
+    password: "test",
+    nombre: "Usuario",
+    apellido: "Tester"
   }
 ];
 
