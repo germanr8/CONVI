@@ -9,6 +9,7 @@ import { AppRoutingModule } from "./app-routing.module"; // Routing module impor
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations"; // Animations module import
 import { CarouselModule } from "ngx-bootstrap/carousel";
 import { ChartsModule } from "ng2-charts";
+import { HttpClientModule } from "@angular/common/http";
 // Services
 import { AlertasService } from "./services/alertas.service";
 import { MapaService } from "./services/mapa.service";
@@ -97,7 +98,8 @@ const routes: Routes = [
     FormsModule,
     BrowserAnimationsModule,
     CarouselModule.forRoot(),
-    ChartsModule
+    ChartsModule,
+    HttpClientModule
   ],
   exports: [RouterModule, FormsModule, ReactiveFormsModule],
   // Services list
