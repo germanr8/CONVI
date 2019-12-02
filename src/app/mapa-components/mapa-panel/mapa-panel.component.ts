@@ -17,6 +17,7 @@ export class MapaPanelComponent implements OnInit {
   cifraRoboAutos;
   alcaldiasDatos;
   alcaldiaID;
+
   reportes: Reporte[] = [];
   geojsonMarkerOptions = {
     radius: 8,
@@ -26,6 +27,7 @@ export class MapaPanelComponent implements OnInit {
     opacity: 1,
     fillOpacity: 0.8
   };
+
   constructor(
     private reportesService: ReportesService,
     private mapaService: MapaService,
@@ -41,6 +43,18 @@ export class MapaPanelComponent implements OnInit {
     this.cifraViolaciones = "~";
     this.cifraRoboAutos = "~";
     this.cifraSecuestros = "~";
+    this.Gob.setAnio("0");
+  }
+
+  async setDatos() {
+    this.cifraViolaciones = await this.Gob.getViolacion(this.alcaldiaID);
+    this.cifraSecuestros = await this.Gob.getSecuestro(this.alcaldiaID);
+    this.cifraRoboAutos = await this.Gob.getRoboAuto(this.alcaldiaID);
+  }
+
+  async setAnio(event: any) {
+    await this.Gob.setAnio(event.target.value);
+    await this.setDatos();
   }
 
   async onMapReady(map: L.Map) {
@@ -85,9 +99,10 @@ export class MapaPanelComponent implements OnInit {
         this.alcaldiaID
       );
 
-      this.cifraViolaciones = await this.Gob.getViolacion(this.alcaldiaID);
+      /*this.cifraViolaciones = await this.Gob.getViolacion(this.alcaldiaID);
       this.cifraSecuestros = await this.Gob.getSecuestro(this.alcaldiaID);
-      this.cifraRoboAutos = await this.Gob.getRoboAuto(this.alcaldiaID);
+      this.cifraRoboAutos = await this.Gob.getRoboAuto(this.alcaldiaID);*/
+      await this.setDatos();
 
       // Detectar cambios de forma manual
       this.changeDetectorRef.detectChanges();

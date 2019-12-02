@@ -8,18 +8,30 @@ import { Observable } from "rxjs";
   providedIn: "root"
 })
 export class GobService {
+  GobAPI =
+    "https://datos.cdmx.gob.mx/api/records/1.0/search/?dataset=carpetas-de-investigacion-pgj-de-la-ciudad-de-mexico&rows=10&facet=ao_hechos&facet=delito&facet=categoria_delito&facet=alcaldia_hechos";
+
   datosV;
   datosS;
   datosRA;
+  alcaldiaURL = "&refine.alcaldia_hechos=";
+  delitoURL = "&refine.categoria_delito=";
+  anioURL = "&refine.ao_hechos=";
 
-  arregloDelitos: String[];
+  GobURL = this.GobAPI;
 
-  GobURL =
-    "https://datos.cdmx.gob.mx/api/records/1.0/search/?dataset=carpetas-de-investigacion-pgj-de-la-ciudad-de-mexico&rows=10&facet=ao_hechos&facet=delito&facet=categoria_delito&facet=alcaldia_hechos&refine.ao_hechos=2019&refine.alcaldia_hechos=";
   constructor(private http: HttpClient) {}
 
+  async setAnio(anio: string) {
+    if (anio == "0") {
+      this.GobURL = this.GobAPI;
+    } else {
+      this.GobURL = this.GobAPI + this.anioURL + anio;
+    }
+  }
+
   async getViolacion(alcaldia: string) {
-    let alcaldiaS = this.queAlcaldia(alcaldia);
+    let alcaldiaS = this.alcaldiaURL + this.queAlcaldia(alcaldia);
     let delito = "&refine.categoria_delito=VIOLACIÓN";
     let data = await this.http
       .get(this.GobURL + alcaldiaS + delito)
@@ -29,7 +41,7 @@ export class GobService {
   }
 
   async getSecuestro(alcaldia: string) {
-    let alcaldiaS = this.queAlcaldia(alcaldia);
+    let alcaldiaS = "&refine.alcaldia_hechos=" + this.queAlcaldia(alcaldia);
     let delito = "&refine.categoria_delito=SECUESTRO";
     let data = await this.http
       .get(this.GobURL + alcaldiaS + delito)
@@ -39,7 +51,7 @@ export class GobService {
   }
 
   async getRoboAuto(alcaldia: string) {
-    let alcaldiaS = this.queAlcaldia(alcaldia);
+    let alcaldiaS = "&refine.alcaldia_hechos=" + this.queAlcaldia(alcaldia);
     let delito =
       "&refine.delito=ROBO+DE+VEHICULO+DE+SERVICIO+PARTICULAR+SIN+VIOLENCIA";
     let data = await this.http
