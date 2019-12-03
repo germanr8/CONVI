@@ -1,44 +1,64 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { ReportesService } from '../../services/reportes.service';
-import { MapaService } from '../../services/mapa.service';
-import { Reporte } from '../../models/Reporte';
-import * as L from 'leaflet';
+import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
+import { ReportesService } from "../../services/reportes.service";
+import { MapaService } from "../../services/mapa.service";
+import { Reporte } from "../../models/Reporte";
+import { GobService } from "../../services/gob.service";
+import * as L from "leaflet";
 
 @Component({
-  selector: 'app-mapa-panel',
-  templateUrl: './mapa-panel.component.html',
-  styleUrls: ['./mapa-panel.component.scss']
+  selector: "app-mapa-panel",
+  templateUrl: "./mapa-panel.component.html",
+  styleUrls: ["./mapa-panel.component.scss"]
 })
 export class MapaPanelComponent implements OnInit {
+  isLoading: boolean = false;
   options;
-  cifraHomicidios;
-  cifraRoboAutos;
+  cifraViolaciones;
   cifraSecuestros;
+  cifraRoboAutos;
   alcaldiasDatos;
   alcaldiaID;
+
   reportes: Reporte[] = [];
   geojsonMarkerOptions = {
     radius: 8,
-    fillColor: '#ff7800',
-    color: '#000',
+    fillColor: "#ff7800",
+    color: "#000",
     weight: 1,
     opacity: 1,
     fillOpacity: 0.8
   };
+
   constructor(
     private reportesService: ReportesService,
     private mapaService: MapaService,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private Gob: GobService
   ) {}
 
   ngOnInit() {
-    /* La implementación probablemente tenga que cambiar para que se muestren primero
-    los datos de toda la CDMX y después cambie dependiendo de la alcaldía que se eliga */
     this.options = this.mapaService.construirMapa();
     this.alcaldiasDatos = this.mapaService.getAlcaldiasDatos();
-    this.cifraHomicidios = '~';
-    this.cifraRoboAutos = '~';
-    this.cifraSecuestros = '~';
+    this.cifraViolaciones = "~";
+    this.cifraRoboAutos = "~";
+    this.cifraSecuestros = "~";
+    this.Gob.setAnio("0");
+  }
+
+  async setDatos() {
+    this.isLoading = true;
+    this.changeDetectorRef.detectChanges();
+    console.log("Loading");
+    this.cifraViolaciones = await this.Gob.getViolacion(this.alcaldiaID);
+    this.cifraSecuestros = await this.Gob.getSecuestro(this.alcaldiaID);
+    this.cifraRoboAutos = await this.Gob.getRoboAuto(this.alcaldiaID);
+    this.isLoading = false;
+    console.log("DONE");
+  }
+
+  async setAnio(event: any) {
+    await this.Gob.setAnio(event.target.value);
+    await this.setDatos();
   }
 
   async onMapReady(map: L.Map) {
@@ -48,13 +68,13 @@ export class MapaPanelComponent implements OnInit {
 
     var alcaldias;
 
-    function highlightFeature(e) {
+    function sobresaltarAlcaldia(e) {
       var layer = e.target;
 
       layer.setStyle({
         weight: 5,
-        color: '#94dee3',
-        dashArray: '',
+        color: "#94dee3",
+        dashArray: "",
         fillOpacity: 0.7
       });
 
@@ -62,7 +82,7 @@ export class MapaPanelComponent implements OnInit {
         layer.bringToFront();
       }
     }
-    function resetHighlight(e) {
+    function eliminarResaltado(e) {
       alcaldias.resetStyle(e.target);
     }
 
@@ -74,7 +94,7 @@ export class MapaPanelComponent implements OnInit {
     Se pone para detectar cambios en las variables de Angular, ya que el codigo de esta funcion
     cae fuera de la NgZone y no se detecta de forma automática, hay que actualizarla nosotros mismos
     */
-    const zoomToFeature = e => {
+    const clickOnAlcaldia = async e => {
       // Hacer zoom donde se hizo click en el mapa
       // map.fitBounds(e.target.getBounds());
       this.alcaldiaID = e.target.feature.properties.cve_mun;
@@ -82,16 +102,11 @@ export class MapaPanelComponent implements OnInit {
       this.reportes = this.reportesService.getReportesRecientes(
         this.alcaldiaID
       );
-      console.log(this.reportes);
-      this.cifraHomicidios = this.reportesService.getCifraHomicidios(
-        this.alcaldiaID
-      );
-      this.cifraRoboAutos = this.reportesService.getCifraRoboAutos(
-        this.alcaldiaID
-      );
-      this.cifraSecuestros = this.reportesService.getCifraSecuestros(
-        this.alcaldiaID
-      );
+
+      /*this.cifraViolaciones = await this.Gob.getViolacion(this.alcaldiaID);
+      this.cifraSecuestros = await this.Gob.getSecuestro(this.alcaldiaID);
+      this.cifraRoboAutos = await this.Gob.getRoboAuto(this.alcaldiaID);*/
+      await this.setDatos();
       // Detectar cambios de forma manual
       this.changeDetectorRef.detectChanges();
     };
@@ -101,45 +116,45 @@ export class MapaPanelComponent implements OnInit {
         layer.bindPopup(feature.properties.nomgeo);
       }
       layer.on({
-        mouseover: highlightFeature,
-        mouseout: resetHighlight,
-        click: zoomToFeature
+        mouseover: sobresaltarAlcaldia,
+        mouseout: eliminarResaltado,
+        click: clickOnAlcaldia
       });
     }
     function style(feature) {
       switch (feature.properties.cve_mun) {
-        case '002':
-          return { color: '#870505' };
-        case '003':
-          return { color: '#873305' };
-        case '004':
-          return { color: '#875105' };
-        case '005':
-          return { color: '#877c05' };
-        case '006':
-          return { color: '#6b8705' };
-        case '007':
-          return { color: '#378705' };
-        case '008':
-          return { color: '#058774' };
-        case '009':
-          return { color: '#057187' };
-        case '010':
-          return { color: '#055387' };
-        case '011':
-          return { color: '#052e87' };
-        case '012':
-          return { color: '#280587' };
-        case '013':
-          return { color: '#570587' };
-        case '014':
-          return { color: '#710587' };
-        case '015':
-          return { color: '#87055e' };
-        case '016':
-          return { color: '#870532' };
-        case '017':
-          return { color: '#87051d' };
+        case "002":
+          return { color: "#870505" };
+        case "003":
+          return { color: "#873305" };
+        case "004":
+          return { color: "#875105" };
+        case "005":
+          return { color: "#877c05" };
+        case "006":
+          return { color: "#6b8705" };
+        case "007":
+          return { color: "#378705" };
+        case "008":
+          return { color: "#058774" };
+        case "009":
+          return { color: "#057187" };
+        case "010":
+          return { color: "#055387" };
+        case "011":
+          return { color: "#052e87" };
+        case "012":
+          return { color: "#280587" };
+        case "013":
+          return { color: "#570587" };
+        case "014":
+          return { color: "#710587" };
+        case "015":
+          return { color: "#87055e" };
+        case "016":
+          return { color: "#870532" };
+        case "017":
+          return { color: "#87051d" };
       }
     }
     alcaldias = L.geoJSON(await this.alcaldiasDatos, {
