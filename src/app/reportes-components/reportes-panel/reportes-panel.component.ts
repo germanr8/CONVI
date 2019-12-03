@@ -20,6 +20,7 @@ export class ReportesPanelComponent implements OnInit {
   reporteForm: FormGroup;
   nombreAlcaldia;
   reportes: any;
+  success: boolean = false;
   alcaldias = [
     "Tlalpan",
     "Venustiano Carranza",
@@ -75,6 +76,7 @@ export class ReportesPanelComponent implements OnInit {
 
   enviarReporte() {
     this.reportesService.publicarReporte(this.reporteForm.value);
+    this.success = true;
     this.reporteForm.reset();
   }
 
@@ -86,5 +88,6 @@ export class ReportesPanelComponent implements OnInit {
   mostrarFormulario() {
     this.showReportes = false;
     this.showFormulario = true;
+    this.success = false;
   }
 }

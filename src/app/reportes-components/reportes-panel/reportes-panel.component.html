@@ -59,7 +59,7 @@
         <div class="comment-text">
           {{ reporte.descripcion }}
         </div>
-        <div class="action text-right">
+        <!--<div class="action text-right">
           <button
             type="button"
             class="btn btn-transparent btn-xs"
@@ -81,7 +81,7 @@
           >
             <small><span class="add-comment">😢</span></small>
           </button>
-        </div>
+        </div>-->
       </li>
     </ul>
   </div>
@@ -91,6 +91,9 @@
     *ngIf="showFormulario"
     class="report-form-panel col-md-8 bg-dark report-form-section rounded-right"
   >
+    <div *ngIf="success" class="alert alert-success text-center" role="alert">
+      ¡Reporte enviado con exito!
+    </div>
     <form
       [formGroup]="reporteForm"
       (ngSubmit)="enviarReporte()"
