@@ -16,18 +16,14 @@ export class MapaPanelComponent implements OnInit {
   cifraViolaciones;
   cifraSecuestros;
   cifraRoboAutos;
+  cifraRoboTranseunte;
+  cifraRoboNegocio;
+  cifraDelitoExtra;
+  delitoElegido;
   alcaldiasDatos;
   alcaldiaID;
 
   reportes: Reporte[] = [];
-  geojsonMarkerOptions = {
-    radius: 8,
-    fillColor: "#ff7800",
-    color: "#000",
-    weight: 1,
-    opacity: 1,
-    fillOpacity: 0.8
-  };
 
   constructor(
     private reportesService: ReportesService,
@@ -39,26 +35,37 @@ export class MapaPanelComponent implements OnInit {
   ngOnInit() {
     this.options = this.mapaService.construirMapa();
     this.alcaldiasDatos = this.mapaService.getAlcaldiasDatos();
-    this.cifraViolaciones = "~";
-    this.cifraRoboAutos = "~";
-    this.cifraSecuestros = "~";
+    this.alcaldiaID = "0";
     this.Gob.setAnio("0");
+    this.delitoElegido = "Delitos Restantes";
+    this.getDatos();
   }
 
-  async setDatos() {
+  async getDatos() {
     this.isLoading = true;
     this.changeDetectorRef.detectChanges();
-    console.log("Loading");
     this.cifraViolaciones = await this.Gob.getViolacion(this.alcaldiaID);
     this.cifraSecuestros = await this.Gob.getSecuestro(this.alcaldiaID);
     this.cifraRoboAutos = await this.Gob.getRoboAuto(this.alcaldiaID);
+    this.cifraRoboTranseunte = await this.Gob.getRoboTranseunte(
+      this.alcaldiaID
+    );
+    this.cifraRoboNegocio = await this.Gob.getRoboNegocio(this.alcaldiaID);
+    this.cifraDelitoExtra = await this.Gob.getDelitoExtra(this.alcaldiaID);
+    this.reportes = this.reportesService.getReportesRecientes(this.alcaldiaID);
     this.isLoading = false;
-    console.log("DONE");
   }
 
   async setAnio(event: any) {
     await this.Gob.setAnio(event.target.value);
-    await this.setDatos();
+    await this.getDatos();
+  }
+
+  async setDelito(event: any) {
+    await this.Gob.setDelitoExtra(event.target.value);
+    this.delitoElegido =
+      event.target.options[event.target.options.selectedIndex].text;
+    await this.getDatos();
   }
 
   async onMapReady(map: L.Map) {
@@ -95,18 +102,10 @@ export class MapaPanelComponent implements OnInit {
     cae fuera de la NgZone y no se detecta de forma automática, hay que actualizarla nosotros mismos
     */
     const clickOnAlcaldia = async e => {
-      // Hacer zoom donde se hizo click en el mapa
-      // map.fitBounds(e.target.getBounds());
+      //Alcaldia ID
       this.alcaldiaID = e.target.feature.properties.cve_mun;
-
-      this.reportes = this.reportesService.getReportesRecientes(
-        this.alcaldiaID
-      );
-
-      /*this.cifraViolaciones = await this.Gob.getViolacion(this.alcaldiaID);
-      this.cifraSecuestros = await this.Gob.getSecuestro(this.alcaldiaID);
-      this.cifraRoboAutos = await this.Gob.getRoboAuto(this.alcaldiaID);*/
-      await this.setDatos();
+      //Datos
+      await this.getDatos();
       // Detectar cambios de forma manual
       this.changeDetectorRef.detectChanges();
     };
@@ -121,6 +120,8 @@ export class MapaPanelComponent implements OnInit {
         click: clickOnAlcaldia
       });
     }
+
+    //Color de las alcaldias y delimitacion geografica por Leaflet
     function style(feature) {
       switch (feature.properties.cve_mun) {
         case "002":
