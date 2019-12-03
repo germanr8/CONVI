@@ -6,7 +6,9 @@ CONVI (Consulta de Violencia) is a web application developed to convey crime inc
 
 Frontend developed on Angular8. Download the project and execute `ng serve` for a dev server in `http://localhost:4200/` or simply go to [Heroku app](https://convi-web.herokuapp.com/).
 
-Backend developed with [![LoopBack](<https://github.com/strongloop/loopback-next/raw/master/docs/site/imgs/branding/Powered-by-LoopBack-Badge-(blue)-@2x.png>)](http://loopback.io/). `cd convi-api-mongo` and execute `npm start` for a dev server in `http://localhost:3000/`
+Backend developed with [Loopback 4](https://loopback.io/doc/en/lb4/). `cd convi-api-mongo` and execute `npm start` for a dev server in `http://localhost:3000/`
+
+[![LoopBack](<https://github.com/strongloop/loopback-next/raw/master/docs/site/imgs/branding/Powered-by-LoopBack-Badge-(blue)-@2x.png>)](http://loopback.io/)
 
 ## Code scaffolding
 
