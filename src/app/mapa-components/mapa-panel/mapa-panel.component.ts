@@ -19,9 +19,9 @@ export class MapaPanelComponent implements OnInit {
   cifraRoboTranseunte;
   cifraRoboNegocio;
   cifraDelitoExtra;
-  delitoElegido = "Delitos Restantes";
+  delitoElegido;
   alcaldiasDatos;
-  alcaldiaID = "0";
+  alcaldiaID;
 
   reportes: Reporte[] = [];
 
@@ -35,8 +35,10 @@ export class MapaPanelComponent implements OnInit {
   ngOnInit() {
     this.options = this.mapaService.construirMapa();
     this.alcaldiasDatos = this.mapaService.getAlcaldiasDatos();
-    this.getDatos();
+    this.alcaldiaID = "0";
     this.Gob.setAnio("0");
+    this.delitoElegido = "Delitos Restantes";
+    this.getDatos();
   }
 
   async getDatos() {
