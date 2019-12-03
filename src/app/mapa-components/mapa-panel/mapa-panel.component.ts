@@ -11,6 +11,7 @@ import * as L from "leaflet";
   styleUrls: ["./mapa-panel.component.scss"]
 })
 export class MapaPanelComponent implements OnInit {
+  isLoading: boolean = false;
   options;
   cifraViolaciones;
   cifraSecuestros;
@@ -28,8 +29,6 @@ export class MapaPanelComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    /* La implementación probablemente tenga que cambiar para que se muestren primero
-    los datos de toda la CDMX y después cambie dependiendo de la alcaldía que se eliga */
     this.options = this.mapaService.construirMapa();
     this.alcaldiasDatos = this.mapaService.getAlcaldiasDatos();
     this.cifraViolaciones = "~";
@@ -39,10 +38,15 @@ export class MapaPanelComponent implements OnInit {
   }
 
   async setDatos() {
+    this.isLoading = true;
+    this.changeDetectorRef.detectChanges();
+    console.log("Loading");
     this.cifraViolaciones = await this.Gob.getViolacion(this.alcaldiaID);
     this.cifraSecuestros = await this.Gob.getSecuestro(this.alcaldiaID);
     this.cifraRoboAutos = await this.Gob.getRoboAuto(this.alcaldiaID);
     this.reportes = this.reportesService.getReportesRecientes(this.alcaldiaID);
+    this.isLoading = false;
+    console.log("DONE");
   }
 
   async setAnio(event: any) {
