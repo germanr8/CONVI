@@ -10,7 +10,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations"; 
 import { CarouselModule } from "ngx-bootstrap/carousel";
 import { ChartsModule } from "ng2-charts";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http"; // HTTP Client
-import { fakeBackendProvider } from "./_helpers";
+//import { fakeBackendProvider } from "./_helpers";
 import { JwtInterceptor, ErrorInterceptor } from "./_helpers";
 // Services
 import { AlertasService } from "./services/alertas.service";
@@ -32,6 +32,7 @@ import { BannerCarouselComponent } from "./inicio-components/banner-carousel/ban
 import { GraficaComponent } from "./inicio-components/grafica/grafica.component";
 import { UltimosReportesComponent } from "./inicio-components/ultimos-reportes/ultimos-reportes.component";
 import { LoginComponent } from "./login/login.component";
+import { SignupComponent } from "./signup/signup.component";
 
 const routes: Routes = [
   {
@@ -65,6 +66,11 @@ const routes: Routes = [
     data: { animation: "Login" }
   },
   {
+    path: "signup",
+    component: SignupComponent,
+    data: { animation: "Signup" }
+  },
+  {
     path: "**",
     pathMatch: "full",
     redirectTo: "/inicio"
@@ -87,7 +93,8 @@ const routes: Routes = [
     BannerCarouselComponent,
     GraficaComponent,
     UltimosReportesComponent,
-    LoginComponent
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -110,10 +117,10 @@ const routes: Routes = [
     MapaService,
     ReportesService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
 
     // provider used to create fake backend
-    fakeBackendProvider
+    // fakeBackendProvider
   ],
   bootstrap: [AppComponent]
 })

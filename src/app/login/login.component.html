@@ -2,6 +2,13 @@
   <div class="card">
     <h4 class="card-header text-center">Inicio de sesión</h4>
     <div class="card-body">
+      <div
+        *ngIf="failedLogin"
+        class="alert alert-danger text-center"
+        role="alert"
+      >
+        ¡Usuario o contraseña incorrectos!
+      </div>
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="username">Correo</label>

@@ -11,6 +11,7 @@ import { Usuario } from "src/app/models/Usuario";
   styleUrls: ["./reportes-panel.component.scss"]
 })
 export class ReportesPanelComponent implements OnInit {
+  userExists: boolean = false;
   order: string = "DESC";
   reporteResult;
   currentUser;
@@ -56,6 +57,7 @@ export class ReportesPanelComponent implements OnInit {
 
   async ngOnInit() {
     this.currentUser = this.authenticationService.currentUserValue;
+    if (this.currentUser) this.userExists = true;
     //console.log(this.currentUser);
     this.reportes = await this.reportesService.getTodosReportes(this.order);
   }
@@ -70,12 +72,6 @@ export class ReportesPanelComponent implements OnInit {
   }
 
   enviarReporte() {
-    var formData: any = new FormData();
-    formData.append("titulo", this.reporteForm.get("titulo").value);
-    formData.append("autor", this.reporteForm.get("autor").value);
-    formData.append("alcaldia", this.reporteForm.get("alcaldia").value);
-    formData.append("direccion", this.reporteForm.get("direccion").value);
-    formData.append("descripcion", this.reporteForm.get("descripcion").value);
     this.reportesService.publicarReporte(this.reporteForm.value);
     this.reporteForm.reset();
   }

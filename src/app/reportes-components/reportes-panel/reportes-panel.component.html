@@ -127,7 +127,7 @@
       <div class="form-group">
         <div class="d-block my-3">
           <label class="center-block font-weight-bold">Autor</label>
-          <div class="custom-control custom-radio">
+          <div *ngIf="userExists" class="custom-control custom-radio">
             <input
               id="noanonimo"
               type="radio"
