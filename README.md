@@ -2,13 +2,11 @@
 
 CONVI (Consulta de Violencia) is a web application developed to convey crime incidence data (from CDMX) in a graphic way. Uses data from CDMX government API (https://datos.cdmx.gob.mx).
 
-# Project build
+# Project's frontend and backend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.5.
+Frontend developed on Angular8. Download the project and execute `ng serve` for a dev server in `http://localhost:4200/` or simply go to [Heroku app](https://convi-web.herokuapp.com/).
 
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Backend developed with [![LoopBack](<https://github.com/strongloop/loopback-next/raw/master/docs/site/imgs/branding/Powered-by-LoopBack-Badge-(blue)-@2x.png>)](http://loopback.io/). `cd convi-api-mongo` and execute `npm start` for a dev server in `http://localhost:3000/`
 
 ## Code scaffolding
 

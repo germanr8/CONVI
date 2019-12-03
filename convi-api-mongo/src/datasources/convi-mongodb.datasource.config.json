@@ -1,0 +1,11 @@
+{
+  "name": "convi_mongodb",
+  "connector": "mongodb",
+  "url": "mongodb+srv://user:p4ss4convi@convi-1-f0hq7.mongodb.net/convi?retryWrites=true&w=majority",
+  "host": "convi-1-f0hq7.mongodb.net/",
+  "port": 27017,
+  "user": "user",
+  "password": "p4ss4convi",
+  "database": "convi",
+  "useNewUrlParser": true
+}
