@@ -2,7 +2,8 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { TouchSequence } from "selenium-webdriver";
 import { dashCaseToCamelCase } from "@angular/compiler/src/util";
-import { Observable } from "rxjs";
+import { Observable, empty } from "rxjs";
+import { del } from "selenium-webdriver/http";
 
 @Injectable({
   providedIn: "root"
@@ -14,6 +15,10 @@ export class GobService {
   datosV;
   datosS;
   datosRA;
+  datosRT;
+  datosRN;
+  datosE;
+  delitoExtra = "";
   alcaldiaURL = "&refine.alcaldia_hechos=";
   delitoURL = "&refine.categoria_delito=";
   anioURL = "&refine.ao_hechos=";
@@ -30,8 +35,33 @@ export class GobService {
     }
   }
 
+  async setDelitoExtra(delito: string) {
+    if (delito != "") {
+      this.delitoExtra = this.delitoURL + delito;
+    } else {
+      this.delitoExtra = delito;
+    }
+  }
+
+  async getDelitoExtra(alcaldia: string) {
+    let alcaldiaS = this.queAlcaldia(alcaldia);
+    let data = await this.http
+      .get(this.GobURL + alcaldiaS + this.delitoExtra)
+      .toPromise();
+    this.datosE = data["nhits"];
+
+    if (this.delitoExtra == "") {
+      return (
+        this.datosE -
+        (this.datosV + this.datosS + this.datosRA + this.datosRN + this.datosRT)
+      );
+    }
+
+    return this.datosE;
+  }
+
   async getViolacion(alcaldia: string) {
-    let alcaldiaS = this.alcaldiaURL + this.queAlcaldia(alcaldia);
+    let alcaldiaS = this.queAlcaldia(alcaldia);
     let delito = "&refine.categoria_delito=VIOLACIÓN";
     let data = await this.http
       .get(this.GobURL + alcaldiaS + delito)
@@ -41,7 +71,7 @@ export class GobService {
   }
 
   async getSecuestro(alcaldia: string) {
-    let alcaldiaS = "&refine.alcaldia_hechos=" + this.queAlcaldia(alcaldia);
+    let alcaldiaS = this.queAlcaldia(alcaldia);
     let delito = "&refine.categoria_delito=SECUESTRO";
     let data = await this.http
       .get(this.GobURL + alcaldiaS + delito)
@@ -51,7 +81,7 @@ export class GobService {
   }
 
   async getRoboAuto(alcaldia: string) {
-    let alcaldiaS = "&refine.alcaldia_hechos=" + this.queAlcaldia(alcaldia);
+    let alcaldiaS = this.queAlcaldia(alcaldia);
     let delito =
       "&refine.delito=ROBO+DE+VEHICULO+DE+SERVICIO+PARTICULAR+SIN+VIOLENCIA";
     let data = await this.http
@@ -61,40 +91,63 @@ export class GobService {
     return this.datosRA;
   }
 
-  queAlcaldia(id: string): String {
+  async getRoboTranseunte(alcaldia: string) {
+    let alcaldiaS = this.queAlcaldia(alcaldia);
+    let delito =
+      "&refine.categoria_delito=ROBO+A+TRANSEUNTE+EN+VÍA+PÚBLICA+CON+Y+SIN+VIOLENCIA";
+    let data = await this.http
+      .get(this.GobURL + alcaldiaS + delito)
+      .toPromise();
+    this.datosRT = data["nhits"];
+    return this.datosRT;
+  }
+
+  async getRoboNegocio(alcaldia: string) {
+    let alcaldiaS = this.queAlcaldia(alcaldia);
+    let delito = "&refine.categoria_delito=ROBO+A+NEGOCIO+CON+VIOLENCIA";
+    let data = await this.http
+      .get(this.GobURL + alcaldiaS + delito)
+      .toPromise();
+    this.datosRN = data["nhits"];
+    return this.datosRN;
+  }
+
+  queAlcaldia(id: string) {
     switch (id) {
+      case "0":
+        return "";
       case "002":
-        return "AZCAPOTZALCO";
+        return this.alcaldiaURL + "AZCAPOTZALCO";
       case "003":
-        return "COYOACAN";
+        return this.alcaldiaURL + "COYOACAN";
       case "004":
-        return "CUAJIMALPA+DE+MORELOS";
+        return this.alcaldiaURL + "CUAJIMALPA+DE+MORELOS";
       case "005":
-        return "GUSTAVO+A+MADERO";
+        return this.alcaldiaURL + "GUSTAVO+A+MADERO";
       case "006":
-        return "IZTACALCO";
+        return this.alcaldiaURL + "IZTACALCO";
       case "007":
-        return "IZTAPALAPA";
+        return this.alcaldiaURL + "IZTAPALAPA";
       case "008":
-        return "LA+MAGDALENA+CONTRERAS";
+        return this.alcaldiaURL + "LA+MAGDALENA+CONTRERAS";
       case "009":
-        return "MILPA+ALTA";
+        return this.alcaldiaURL + "MILPA+ALTA";
       case "010":
-        return "ALVARO+OBREGON";
+        return this.alcaldiaURL + "ALVARO+OBREGON";
       case "011":
-        return "TLAHUAC";
+        return this.alcaldiaURL + "TLAHUAC";
       case "012":
-        return "TLALPAN";
+        return this.alcaldiaURL + "TLALPAN";
       case "013":
-        return "XOCHIMILCO";
+        return this.alcaldiaURL + "XOCHIMILCO";
       case "014":
-        return "BENITO+JUAREZ";
+        return this.alcaldiaURL + "BENITO+JUAREZ";
       case "015":
-        return "CUAUHTEMOC";
+        return this.alcaldiaURL + "CUAUHTEMOC";
       case "016":
-        return "MIGUEL+HIDALGO";
+        return this.alcaldiaURL + "MIGUEL+HIDALGO";
       case "017":
-        return "VENUSTIANO+CARRANZA";
+        return this.alcaldiaURL + "VENUSTIANO+CARRANZA";
     }
   }
 }

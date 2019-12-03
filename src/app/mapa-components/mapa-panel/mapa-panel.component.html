@@ -54,15 +54,71 @@
           <span class="badge badge-primary badge-pill">
             {{ cifraSecuestros }}
           </span>
-          secuestros
+          Secuestros
         </li>
+
         <li class="list-group-item">
           <span class="badge badge-danger badge-pill">
             {{ cifraRoboAutos }}
           </span>
-          robos de auto
+          Robos de auto
+        </li>
+
+        <li class="list-group-item">
+          <span class="badge badge-success badge-pill">
+            {{ cifraRoboNegocio }}
+          </span>
+          Robos a Negocio
+        </li>
+
+        <li class="list-group-item">
+          <span class="badge badge-info badge-pill">
+            {{ cifraRoboTranseunte }}
+          </span>
+          Robos a Transeunte
+        </li>
+
+        <li class="list-group-item">
+          <span class="badge badge-dark badge-pill">
+            {{ cifraDelitoExtra }}
+          </span>
+          {{ delitoElegido }}
         </li>
       </ul>
+      <select
+        (change)="setDelito($event)"
+        class="btn btn-warning browser-default custom-select"
+      >
+        <option selected value="">Delitos Restantes</option>
+        <option value="ROBO+A+CASA+HABITACIÓN+CON+VIOLENCIA"
+          >Robo a Casa Habitación</option
+        >
+        <option value="ROBO+A+REPARTIDOR+CON+Y+SIN+VIOLENCIA"
+          >Robo a Repartidor</option
+        >
+        <option value="ROBO+A+PASAJERO+A+BORDO+DEL+METRO+CON+Y+SIN+VIOLENCIA"
+          >Robo a Pasajero en Metro</option
+        >
+        <option value="ROBO+A+PASAJERO+A+BORDO+DE+MICROBUS+CON+Y+SIN+VIOLENCIA"
+          >Robo a Pasajero en Microbus</option
+        >
+        <option value="ROBO+A+PASAJERO+A+BORDO+DE+TAXI+CON+VIOLENCIA"
+          >Robo a Pasajero en Taxi</option
+        >
+        <option value="ROBO+A+CUENTAHABIENTE+SALIENDO+DEL+CAJERO+CON+VIOLENCIA"
+          >Robo saliendo del Cajero</option
+        >
+        <option value="ROBO+A+TRANSPORTISTA+CON+Y+SIN+VIOLENCIA"
+          >Robo a Transportista</option
+        >
+        <option value="LESIONES+DOLOSAS+POR+DISPARO+DE+ARMA+DE+FUEGO"
+          >Lesiones por Disparo</option
+        >
+        <option value="HOMICIDIO+DOLOSO">Homicidio Doloso</option>
+        <option value="DELITO+DE+BAJO+IMPACTO">Delito de Bajo Impacto</option>
+      </select>
+
+      <p class="text-center">Seleccion de otro delito</p>
       <small class="form-text text-muted text-justify"
         >* Datos obtenidos del
         <a class="text-convi" href="https://datos.cdmx.gob.mx"
