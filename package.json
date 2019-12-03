@@ -4,11 +4,16 @@
   "description": "CONVI (Consulta de Violencia) is a web application developed to convey violence data (from CDMX) in a graphic way. Uses data from CDMX government API (https://datos.cdmx.gob.mx).",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
+    "postinstall": "ng build --aot --prod",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
+  },
+  "engines": {
+    "node": "8.12.0",
+    "npm": "6.4.1"
   },
   "author": "Germán Reyes G. & Yair Yolotl Pimentel V.",
   "private": true,
