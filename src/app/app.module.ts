@@ -107,8 +107,7 @@ const routes: Routes = [
     FormsModule,
     BrowserAnimationsModule,
     CarouselModule.forRoot(),
-    ChartsModule,
-    HttpClientModule
+    ChartsModule
   ],
   exports: [RouterModule, FormsModule, ReactiveFormsModule],
   // Services list
