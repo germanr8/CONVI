@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { AlertasService } from '../../services/alertas.service';
+import { Component, OnInit } from "@angular/core";
+import { AlertasService } from "../../services/alertas.service";
 
 @Component({
-  selector: 'app-alertas',
-  templateUrl: './alertas.component.html',
-  styleUrls: ['./alertas.component.scss']
+  selector: "app-alertas",
+  templateUrl: "./alertas.component.html",
+  styleUrls: ["./alertas.component.scss"]
 })
 export class AlertasComponent implements OnInit {
-  images = []; // 3 imágenes más recientes de reportes de alerta amber
-  constructor(private alertasService: AlertasService) {
-    this.images = alertasService.getAlertasRecientes();
-  }
+  alertas = []; // 3 imágenes más recientes de reportes de alerta amber
+  images = true;
+  constructor(private alertasService: AlertasService) {}
 
-  ngOnInit() {}
+  async ngOnInit() {
+    this.alertas = await this.alertasService.getAlertasRecientes();
+  }
 }

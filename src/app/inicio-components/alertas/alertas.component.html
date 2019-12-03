@@ -6,19 +6,12 @@
   </div>
   <!--Carousel-->
   <ngb-carousel class="col-lg-11 col-md-12 bg-dark text-center" *ngIf="images">
-    <ng-template ngbSlide>
+    <ng-template ngbSlide *ngFor="let alerta of alertas; let i = index">
       <div class="carousel-inner">
-        <img [src]="images[0]" alt="Random first slide" />
-      </div>
-    </ng-template>
-    <ng-template ngbSlide>
-      <div class="carousel-inner">
-        <img [src]="images[1]" alt="Random second slide" />
-      </div>
-    </ng-template>
-    <ng-template ngbSlide>
-      <div class="carousel-inner">
-        <img [src]="images[2]" alt="Random third slide" />
+        <img
+          [src]="'../../../assets/img/' + alertas[i].url"
+          alt="Random first slide"
+        />
       </div>
     </ng-template>
   </ngb-carousel>

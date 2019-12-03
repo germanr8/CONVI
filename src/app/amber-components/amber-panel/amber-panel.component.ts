@@ -1,20 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { AlertasService } from '../../services/alertas.service';
-import { Alerta } from '../../models/Alerta';
+import { Component, OnInit } from "@angular/core";
+import { AlertasService } from "../../services/alertas.service";
+import { Alerta } from "../../models/Alerta";
 
 @Component({
-  selector: 'app-amber-panel',
-  templateUrl: './amber-panel.component.html',
-  styleUrls: ['./amber-panel.component.scss']
+  selector: "app-amber-panel",
+  templateUrl: "./amber-panel.component.html",
+  styleUrls: ["./amber-panel.component.scss"]
 })
 export class AmberPanelComponent implements OnInit {
   showAlertas: boolean;
   showInformacion: boolean;
   alertas: Alerta[] = [];
+  order: string = "DESC";
   constructor(private alertasService: AlertasService) {}
 
-  ngOnInit() {
-    this.alertas = this.alertasService.getTodasAlertas();
+  async ngOnInit() {
+    this.alertas = await this.alertasService.getTodasAlertas(this.order);
     this.showAlertas = true;
     this.showInformacion = false;
   }
@@ -27,5 +28,10 @@ export class AmberPanelComponent implements OnInit {
   mostrarInformacion() {
     this.showAlertas = false;
     this.showInformacion = true;
+  }
+
+  async cambiarOrden(value) {
+    this.order = <string>value;
+    this.alertas = await this.alertasService.getTodasAlertas(this.order);
   }
 }

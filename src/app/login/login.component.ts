@@ -48,19 +48,9 @@ export class LoginComponent implements OnInit {
     let success = this.authenticationService.loginSuccess();
     this.loading = false;
     this.failedLogin = !success;
+  }
 
-    /* this.authenticationService
-      .login(this.f.username.value, this.f.password.value)
-      .pipe(first())
-      .subscribe(
-        data => {
-          this.router.navigate([this.returnUrl]);
-          window.location.reload();
-        },
-        error => {
-          this.error = "Error: usuario o contraseña incorrectos";
-          this.loading = false;
-        }
-      );*/
+  goToSignup() {
+    this.router.navigate(["/signup"]);
   }
 }

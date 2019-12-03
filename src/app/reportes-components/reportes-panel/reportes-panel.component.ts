@@ -62,9 +62,12 @@ export class ReportesPanelComponent implements OnInit {
       if (this.currentUser) this.userExists = true;
     }
 
-    this.reportes = await this.reportesService.getTodosReportes(this.order);
+    this.cargarReportes();
   }
 
+  async cargarReportes() {
+    this.reportes = await this.reportesService.getTodosReportes(this.order);
+  }
   async cambiarOrden(value) {
     this.order = <string>value;
     this.reportes = await this.reportesService.getTodosReportes(this.order);
@@ -83,6 +86,7 @@ export class ReportesPanelComponent implements OnInit {
   mostrarReportes() {
     this.showReportes = true;
     this.showFormulario = false;
+    this.cargarReportes();
   }
 
   mostrarFormulario() {

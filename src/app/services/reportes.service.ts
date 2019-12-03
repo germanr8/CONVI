@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { Reporte } from "../models/Reporte";
-import { compilePipeFromRender2 } from "@angular/compiler/src/render3/r3_pipe_compiler";
 import { HttpClient } from "@angular/common/http";
 
 @Injectable({
@@ -105,120 +104,6 @@ export class ReportesService {
     );
   }
 
-  getCifraHomicidios(alcaldiaID: string) {
-    /* WARNING: Cambiar! Está hardcodeado!! */
-    switch (alcaldiaID) {
-      case "002":
-        return 2;
-      case "003":
-        return 3;
-      case "004":
-        return 4;
-      case "005":
-        return 5;
-      case "006":
-        return 6;
-      case "007":
-        return 7;
-      case "008":
-        return 8;
-      case "009":
-        return 9;
-      case "010":
-        return 10;
-      case "011":
-        return 11;
-      case "012":
-        return 12;
-      case "013":
-        return 13;
-      case "014":
-        return 14;
-      case "015":
-        return 15;
-      case "016":
-        return 16;
-      case "017":
-        return 17;
-    }
-  }
-
-  getCifraRoboAutos(alcaldiaID: string) {
-    /* WARNING: Cambiar! Está hardcodeado!! */
-    switch (alcaldiaID) {
-      case "002":
-        return 22;
-      case "003":
-        return 33;
-      case "004":
-        return 44;
-      case "005":
-        return 55;
-      case "006":
-        return 66;
-      case "007":
-        return 77;
-      case "008":
-        return 88;
-      case "009":
-        return 99;
-      case "010":
-        return 1010;
-      case "011":
-        return 1111;
-      case "012":
-        return 1212;
-      case "013":
-        return 1313;
-      case "014":
-        return 1414;
-      case "015":
-        return 1515;
-      case "016":
-        return 1616;
-      case "017":
-        return 1717;
-    }
-  }
-
-  getCifraSecuestros(alcaldiaID: string) {
-    /* WARNING: Cambiar! Está hardcodeado!! */
-    switch (alcaldiaID) {
-      case "002":
-        return 20;
-      case "003":
-        return 30;
-      case "004":
-        return 40;
-      case "005":
-        return 50;
-      case "006":
-        return 60;
-      case "007":
-        return 70;
-      case "008":
-        return 80;
-      case "009":
-        return 90;
-      case "010":
-        return 100;
-      case "011":
-        return 110;
-      case "012":
-        return 120;
-      case "013":
-        return 130;
-      case "014":
-        return 140;
-      case "015":
-        return 150;
-      case "016":
-        return 160;
-      case "017":
-        return 170;
-    }
-  }
-
   async getCantidadReportes() {
     let cantidadReportesURL = this.server + "/reportes/count";
     let data = await this.http.get<any>(cantidadReportesURL).toPromise();
@@ -226,7 +111,7 @@ export class ReportesService {
   }
 
   getCantidadVisitas() {
-    /* WARNING: Cambiar! Está hardcodeado!! */
+    /* Hardcoddeado */
     return Math.floor(Math.random() * 18) + 9;
   }
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { ChartOptions } from "chart.js";
-import { Label, BaseChartDirective } from "ng2-charts";
 import { ReportesService } from "../../services/reportes.service";
 import { AlertasService } from "../../services/alertas.service";
 /* Tutorial de:
@@ -41,6 +40,7 @@ export class GraficaComponent implements OnInit {
 
   async ngOnInit() {
     this.cantidadReportes = await this.reportesService.getCantidadReportes();
+    this.cantidadAlertas = await this.alertasService.getCantidadAlertas();
     this.pieChartData = [
       this.cantidadReportes,
       this.cantidadVisitas,

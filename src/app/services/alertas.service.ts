@@ -1,51 +1,45 @@
-import { Injectable } from '@angular/core';
-import { Alerta } from '../models/Alerta';
-import { Alert } from 'selenium-webdriver';
+import { Injectable } from "@angular/core";
+import { Alerta } from "../models/Alerta";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class AlertasService {
   todasAlertas: Alerta[] = [];
-  recentImages: string[] = [];
-  constructor() {}
+  ultimasAlertas: Alerta[] = [];
+  cantidadAlertas: number;
+  server = "http://localhost:3000";
+  constructor(private http: HttpClient) {}
 
-  getTodasAlertas() {
-    /* WARNING: Cambiar! Está hardcodeado!! */
-    let a1 = new Alerta();
-    a1.autor = 'Anónimo';
-    a1.fecha = '13 de septiembre del 2019';
-    a1.url = '../../../assets/img/ejem_alerta_amber.jpg';
+  async getTodasAlertas(order: String) {
+    let todoasAlertasURL;
 
-    let a2 = new Alerta();
-    a2.autor = 'Juan Luis Pérez';
-    a2.fecha = '17 de septiembre del 2020';
-    a2.url = '../../../assets/img/ejem_alerta_amber2.jpg';
-
-    let a3 = new Alerta();
-    a3.autor = 'Anónimo';
-    a3.fecha = '26 de octubre del 2019';
-    a3.url = '../../../assets/img/ejem_alerta_amber3.jpg';
-
-    this.todasAlertas = [a1, a2, a3];
+    todoasAlertasURL =
+      this.server +
+      "/alertas?filter[order]=_id%20" +
+      order +
+      "&filter[limit]=50&filter[skip]=0";
+    let data = await this.http.get<Alerta[]>(todoasAlertasURL).toPromise();
+    this.todasAlertas = data;
     return this.todasAlertas;
   }
 
-  getAlertasRecientes() {
-    /* WARNING: Cambiar! Está hardcodeado!! */
+  async getAlertasRecientes() {
+    let ultimasAlertasURL =
+      this.server +
+      "/alertas?filter[order]=_id%20DESC&filter[limit]=5&filter[skip]=0";
 
-    /* Este servicio se tendrá que cambiar para conseguir las 
-    3 imágenes más recientes de reportes de alerta Amber, la idea
-    es que se consigan de una base de datos */
-    let ph1 = '../../../assets/img/ejem_alerta_amber.jpg';
-    let ph2 = '../../../assets/img/ejem_alerta_amber2.jpg';
-    let ph3 = '../../../assets/img/ejem_alerta_amber3.jpg';
-    this.recentImages = [ph1, ph2, ph3];
-    return this.recentImages;
+    let data = await this.http.get<Alerta[]>(ultimasAlertasURL).toPromise();
+    this.ultimasAlertas = data;
+    return this.ultimasAlertas;
   }
 
-  getCantidadAlertas() {
-    /* WARNING: Cambiar! Está hardcodeado!! */
-    return Math.floor(Math.random() * 5) + 2;
+  async getCantidadAlertas() {
+    let cantidadAlertasURL = this.server + "/alertas/count";
+
+    let data = await this.http.get<any>(cantidadAlertasURL).toPromise();
+    this.cantidadAlertas = data.count;
+    return this.cantidadAlertas;
   }
 }

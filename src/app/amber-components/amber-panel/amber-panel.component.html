@@ -46,13 +46,19 @@
     class="amber-panel col-md-8 bg-dark amber-panel rounded-right"
   >
     <label class="center-block text-white">Ordenar por: </label>
-    <select class="browser-default custom-select">
-      <option selected disabled>-- Orden --</option>
-      <option value="1">Fecha</option>
-      <option value="2">Alcaldía</option>
+    <select
+      class="browser-default custom-select"
+      (change)="cambiarOrden($event.target.value)"
+    >
+      <option selected value="DESC">Fecha (más recientes primero)</option>
+      <option value="ASC">Fecha (más antiguos primero)</option>
     </select>
     <div *ngFor="let alerta of alertas" class="card" style="width: 18rem;">
-      <img class="card-img-top" src="{{ alerta.url }}" alt="Alerta amber" />
+      <img
+        class="card-img-top"
+        src="../../../assets/img/{{ alerta.url }}"
+        alt="Alerta amber"
+      />
       <div class="card-body mic-info">
         <p class="card-text">
           Por: <span class="text-convi">{{ alerta.autor }}</span>
