@@ -177,10 +177,7 @@
         <div class="custom-select">
           <select class="form-control text-center" formControlName="alcaldia">
             <option value="" disabled>--Alcaldía--</option>
-            <option
-              *ngFor="let alcaldia of alcaldias"
-              [ngValue]="alcaldia"
-              (change)="cambiarCiudad()"
+            <option *ngFor="let alcaldia of alcaldias" [ngValue]="alcaldia"
               >{{ alcaldia }}
             </option>
           </select>
