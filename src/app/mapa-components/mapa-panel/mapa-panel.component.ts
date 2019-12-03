@@ -48,12 +48,10 @@ export class MapaPanelComponent implements OnInit {
   async setDatos() {
     this.isLoading = true;
     this.changeDetectorRef.detectChanges();
-    console.log("Loading");
     this.cifraViolaciones = await this.Gob.getViolacion(this.alcaldiaID);
     this.cifraSecuestros = await this.Gob.getSecuestro(this.alcaldiaID);
     this.cifraRoboAutos = await this.Gob.getRoboAuto(this.alcaldiaID);
     this.isLoading = false;
-    console.log("DONE");
   }
 
   async setAnio(event: any) {
@@ -99,7 +97,7 @@ export class MapaPanelComponent implements OnInit {
       // map.fitBounds(e.target.getBounds());
       this.alcaldiaID = e.target.feature.properties.cve_mun;
 
-      this.reportes = this.reportesService.getReportesRecientes(
+      this.reportes = await this.reportesService.getReportesRecientes(
         this.alcaldiaID
       );
 

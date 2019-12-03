@@ -14,10 +14,10 @@ https://medium.com/codingthesmartway-com-blog/angular-chart-js-with-ng2-charts-e
 export class GraficaComponent implements OnInit {
   isDataAvailable: boolean = false;
   cantidadReportes = 0;
-  cantidadReacciones = 0;
+  cantidadVisitas = Math.floor(Math.random() * (100 - 20)) + 20;
   cantidadAlertas = 0;
 
-  public pieChartLabels = ["Reportes", "Reacciones", "Alertas"];
+  public pieChartLabels = ["Reportes", "Visitas", "Alertas"];
   public pieChartData = [];
   public pieChartType = "pie";
   public pieChartLegend = true;
@@ -43,7 +43,7 @@ export class GraficaComponent implements OnInit {
     this.cantidadReportes = await this.reportesService.getCantidadReportes();
     this.pieChartData = [
       this.cantidadReportes,
-      this.cantidadReacciones,
+      this.cantidadVisitas,
       this.cantidadAlertas
     ];
     this.isDataAvailable = true;

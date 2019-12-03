@@ -8,6 +8,7 @@ import { HttpClient } from "@angular/common/http";
 })
 export class ReportesService {
   ultimosReportes: Reporte[] = [];
+  ultimosReportesPorAlcaldia: Reporte[] = [];
   todosReportes: Reporte[] = [];
   server = "http://localhost:3000";
   constructor(private http: HttpClient) {}
@@ -44,181 +45,54 @@ export class ReportesService {
     }
   }
 
-  getReportesRecientes(alcaldiaID: string) {
-    /* WARNING: Cambiar! Está hardcodeado!! */
-    /* Este servicio se tendrá que cambiar para conseguir los 3 últimos reportes
-    de la alcaldía que el usuario eliga */
-    let com1 = new Reporte();
-    let com2 = new Reporte();
-    switch (alcaldiaID) {
+  async getReportesRecientes(alcaldiaID: string) {
+    let alcaldia = this.queAlacaldia(alcaldiaID);
+    let ultimosReportesAlcURL =
+      this.server +
+      "/reportes?filter[where][alcaldia]=" +
+      alcaldia +
+      "&filter[limit]=3";
+    let data = await this.http
+      .get<Reporte[]>(ultimosReportesAlcURL)
+      .toPromise();
+    this.ultimosReportesPorAlcaldia = data;
+    return this.ultimosReportesPorAlcaldia;
+  }
+
+  queAlacaldia(id: String) {
+    switch (id) {
       case "002":
-        com1.titulo = "Robo 1 alcaldía 2";
-        com1.autor = "Anónimo 1 alcaldía 2";
-        com1.fecha = "27 de octubre del 2019";
-        com1.direccion = "Dirección 1 alcaldía 2";
-        com1.descripcion = "Descripcion 1 alcaldía 2";
-        this.ultimosReportes = [com1];
-        return this.ultimosReportes;
+        return "Azcapotzalco";
       case "003":
-        com1.titulo = "Robo 1 alcaldía 3";
-        com1.autor = "Anónimo 1 alcaldía 3";
-        com1.fecha = "27 de octubre del 2019";
-        com1.direccion = "Dirección 1 alcaldía 3";
-        com1.descripcion = "Descripcion 1 alcaldía 3";
-        com2.titulo = "Robo 2 alcaldía 3";
-        com2.autor = "Anónimo 2 alcaldía 3";
-        com2.fecha = "27 de octubre del 2019";
-        com2.direccion = "Dirección 2 alcaldía 3";
-        com2.descripcion = "Descripcion 2 alcaldía 3";
-        this.ultimosReportes = [com1, com2];
-        return this.ultimosReportes;
+        return "Coyoacan";
       case "004":
-        com1.titulo = "Robo 1 alcaldía 4";
-        com1.autor = "Anónimo 1 alcaldía 4";
-        com1.fecha = "27 de octubre del 2019";
-        com1.direccion = "Dirección 1 alcaldía 4";
-        com1.descripcion = "Descripcion 1 alcaldía 4";
-        this.ultimosReportes = [com1];
-        return this.ultimosReportes;
+        return "Cuajimalpa de Morelos";
       case "005":
-        com1.titulo = "Robo 1 alcaldía 5";
-        com1.autor = "Anónimo 1 alcaldía 5";
-        com1.fecha = "27 de octubre del 2019";
-        com1.direccion = "Dirección 1 alcaldía 5";
-        com1.descripcion = "Descripcion 1 alcaldía 5";
-        com2.titulo = "Robo 2 alcaldía 5";
-        com2.autor = "Anónimo 2 alcaldía 5";
-        com2.fecha = "27 de octubre del 2019";
-        com2.direccion = "Dirección 2 alcaldía 5";
-        com2.descripcion = "Descripcion 2 alcaldía 5";
-        this.ultimosReportes = [com1, com2];
-        return this.ultimosReportes;
+        return "Gustavo A. Madero";
       case "006":
-        com1.titulo = "Robo 1 alcaldía 6";
-        com1.autor = "Anónimo 1 alcaldía 6";
-        com1.fecha = "27 de octubre del 2019";
-        com1.direccion = "Dirección 1 alcaldía 6";
-        com1.descripcion = "Descripcion 1 alcaldía 6";
-        this.ultimosReportes = [com1];
-        return this.ultimosReportes;
+        return "Iztacalco";
       case "007":
-        com1.titulo = "Robo 1 alcaldía 7";
-        com1.autor = "Anónimo 1 alcaldía 7";
-        com1.fecha = "27 de octubre del 2019";
-        com1.direccion = "Dirección 1 alcaldía 7";
-        com1.descripcion = "Descripcion 1 alcaldía 7";
-        com2.titulo = "Robo 2 alcaldía 7";
-        com2.autor = "Anónimo 2 alcaldía 7";
-        com2.fecha = "27 de octubre del 2019";
-        com2.direccion = "Dirección 2 alcaldía 7";
-        com2.descripcion = "Descripcion 2 alcaldía 7";
-        this.ultimosReportes = [com1, com2];
-        return this.ultimosReportes;
+        return "Iztapalapa";
       case "008":
-        com1.titulo = "Robo 1 alcaldía 8";
-        com1.autor = "Anónimo 1 alcaldía 8";
-        com1.fecha = "27 de octubre del 2019";
-        com1.direccion = "Dirección 1 alcaldía 8";
-        com1.descripcion = "Descripcion 1 alcaldía 8";
-        this.ultimosReportes = [com1];
-        return this.ultimosReportes;
+        return "Magdalena Contreras";
       case "009":
-        com1.titulo = "Robo 1 alcaldía 9";
-        com1.autor = "Anónimo 1 alcaldía 9";
-        com1.fecha = "27 de octubre del 2019";
-        com1.direccion = "Dirección 1 alcaldía 9";
-        com1.descripcion = "Descripcion 1 alcaldía 9";
-        com2.titulo = "Robo 2 alcaldía 9";
-        com2.autor = "Anónimo 2 alcaldía 9";
-        com2.fecha = "27 de octubre del 2019";
-        com2.direccion = "Dirección 2 alcaldía 9";
-        com2.descripcion = "Descripcion 2 alcaldía 9";
-        this.ultimosReportes = [com1, com2];
-        return this.ultimosReportes;
+        return "Milpa Alta";
       case "010":
-        com1.titulo = "Robo 1 alcaldía 10";
-        com1.autor = "Anónimo 1 alcaldía 10";
-        com1.fecha = "27 de octubre del 2019";
-        com1.direccion = "Dirección 1 alcaldía 10";
-        com1.descripcion = "Descripcion 1 alcaldía 10";
-        this.ultimosReportes = [com1];
-        return this.ultimosReportes;
+        return "Álvaro Obregón";
       case "011":
-        com1.titulo = "Robo 1 alcaldía 11";
-        com1.autor = "Anónimo 1 alcaldía 11";
-        com1.fecha = "27 de octubre del 2019";
-        com1.direccion = "Dirección 1 alcaldía 11";
-        com1.descripcion = "Descripcion 1 alcaldía 11";
-        com2.titulo = "Robo 2 alcaldía 11";
-        com2.autor = "Anónimo 2 alcaldía 11";
-        com2.fecha = "27 de octubre del 2019";
-        com2.direccion = "Dirección 2 alcaldía 11";
-        com2.descripcion = "Descripcion 2 alcaldía 11";
-        this.ultimosReportes = [com1, com2];
-        return this.ultimosReportes;
+        return "Tláhuac";
       case "012":
-        com1.titulo = "Robo 1 alcaldía 12";
-        com1.autor = "Anónimo 1 alcaldía 12";
-        com1.fecha = "27 de octubre del 2019";
-        com1.direccion = "Dirección 1 alcaldía 12";
-        com1.descripcion = "Descripcion 1 alcaldía 12";
-        this.ultimosReportes = [com1];
-        return this.ultimosReportes;
+        return "Tlalpan";
       case "013":
-        com1.titulo = "Robo 1 alcaldía 13";
-        com1.autor = "Anónimo 1 alcaldía 13";
-        com1.fecha = "27 de octubre del 2019";
-        com1.direccion = "Dirección 1 alcaldía 13";
-        com1.descripcion = "Descripcion 1 alcaldía 13";
-        com2.titulo = "Robo 2 alcaldía 13";
-        com2.autor = "Anónimo 2 alcaldía 13";
-        com2.fecha = "27 de octubre del 2019";
-        com2.direccion = "Dirección 2 alcaldía 13";
-        com2.descripcion = "Descripcion 2 alcaldía 13";
-        this.ultimosReportes = [com1, com2];
-        return this.ultimosReportes;
+        return "Xochimilco";
       case "014":
-        com1.titulo = "Robo 1 alcaldía 14";
-        com1.autor = "Anónimo 1 alcaldía 14";
-        com1.fecha = "27 de octubre del 2019";
-        com1.direccion = "Dirección 1 alcaldía 14";
-        com1.descripcion = "Descripcion 1 alcaldía 14";
-        this.ultimosReportes = [com1];
-        return this.ultimosReportes;
+        return "Benito Juárez";
       case "015":
-        com1.titulo = "Robo 1 alcaldía 15";
-        com1.autor = "Anónimo 1 alcaldía 15";
-        com1.fecha = "27 de octubre del 2019";
-        com1.direccion = "Dirección 1 alcaldía 15";
-        com1.descripcion = "Descripcion 1 alcaldía 15";
-        com2.titulo = "Robo 2 alcaldía 15";
-        com2.autor = "Anónimo 2 alcaldía 15";
-        com2.fecha = "27 de octubre del 2019";
-        com2.direccion = "Dirección 2 alcaldía 15";
-        com2.descripcion = "Descripcion 2 alcaldía 15";
-        this.ultimosReportes = [com1, com2];
-        return this.ultimosReportes;
+        return "Cuauhtémoc";
       case "016":
-        com1.titulo = "Robo 1 alcaldía 16";
-        com1.autor = "Anónimo 1 alcaldía 16";
-        com1.fecha = "27 de octubre del 2019";
-        com1.direccion = "Dirección 1 alcaldía 16";
-        com1.descripcion = "Descripcion 1 alcaldía 16";
-        this.ultimosReportes = [com1];
-        return this.ultimosReportes;
+        return "Miguel Hidalgo";
       case "017":
-        com1.titulo = "Robo 1 alcaldía 17";
-        com1.autor = "Anónimo 1 alcaldía 17";
-        com1.fecha = "27 de octubre del 2019";
-        com1.direccion = "Dirección 1 alcaldía 17";
-        com1.descripcion = "Descripcion 1 alcaldía 17";
-        com2.titulo = "Robo 2 alcaldía 17";
-        com2.autor = "Anónimo 2 alcaldía 17";
-        com2.fecha = "27 de octubre del 2019";
-        com2.direccion = "Dirección 2 alcaldía 17";
-        com2.descripcion = "Descripcion 2 alcaldía 17";
-        this.ultimosReportes = [com1, com2];
-        return this.ultimosReportes;
+        return "Venustiano Carranza";
     }
   }
 
@@ -351,7 +225,7 @@ export class ReportesService {
     return data.count;
   }
 
-  getCantidadReacciones() {
+  getCantidadVisitas() {
     /* WARNING: Cambiar! Está hardcodeado!! */
     return Math.floor(Math.random() * 18) + 9;
   }

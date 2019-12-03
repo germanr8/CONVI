@@ -56,8 +56,11 @@ export class ReportesPanelComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.currentUser = this.authenticationService.currentUserValue[0];
-    if (this.currentUser) this.userExists = true;
+    if (this.authenticationService.currentUserValue) {
+      this.currentUser = this.authenticationService.currentUserValue[0];
+      if (this.currentUser) this.userExists = true;
+    }
+
     this.reportes = await this.reportesService.getTodosReportes(this.order);
   }
 
