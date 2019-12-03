@@ -19,14 +19,6 @@ export class MapaPanelComponent implements OnInit {
   alcaldiaID;
 
   reportes: Reporte[] = [];
-  geojsonMarkerOptions = {
-    radius: 8,
-    fillColor: "#ff7800",
-    color: "#000",
-    weight: 1,
-    opacity: 1,
-    fillOpacity: 0.8
-  };
 
   constructor(
     private reportesService: ReportesService,
@@ -50,6 +42,7 @@ export class MapaPanelComponent implements OnInit {
     this.cifraViolaciones = await this.Gob.getViolacion(this.alcaldiaID);
     this.cifraSecuestros = await this.Gob.getSecuestro(this.alcaldiaID);
     this.cifraRoboAutos = await this.Gob.getRoboAuto(this.alcaldiaID);
+    this.reportes = this.reportesService.getReportesRecientes(this.alcaldiaID);
   }
 
   async setAnio(event: any) {
@@ -91,19 +84,10 @@ export class MapaPanelComponent implements OnInit {
     cae fuera de la NgZone y no se detecta de forma automática, hay que actualizarla nosotros mismos
     */
     const clickOnAlcaldia = async e => {
-      // Hacer zoom donde se hizo click en el mapa
-      // map.fitBounds(e.target.getBounds());
+      //Alcaldia ID
       this.alcaldiaID = e.target.feature.properties.cve_mun;
-
-      this.reportes = this.reportesService.getReportesRecientes(
-        this.alcaldiaID
-      );
-
-      /*this.cifraViolaciones = await this.Gob.getViolacion(this.alcaldiaID);
-      this.cifraSecuestros = await this.Gob.getSecuestro(this.alcaldiaID);
-      this.cifraRoboAutos = await this.Gob.getRoboAuto(this.alcaldiaID);*/
+      //Datos
       await this.setDatos();
-
       // Detectar cambios de forma manual
       this.changeDetectorRef.detectChanges();
     };
@@ -118,6 +102,8 @@ export class MapaPanelComponent implements OnInit {
         click: clickOnAlcaldia
       });
     }
+
+    //Color de las alcaldias y delimitacion geografica por Leaflet
     function style(feature) {
       switch (feature.properties.cve_mun) {
         case "002":
