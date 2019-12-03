@@ -10,7 +10,6 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations"; 
 import { CarouselModule } from "ngx-bootstrap/carousel";
 import { ChartsModule } from "ng2-charts";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http"; // HTTP Client
-//import { fakeBackendProvider } from "./_helpers";
 import { JwtInterceptor, ErrorInterceptor } from "./_helpers";
 // Services
 import { AlertasService } from "./services/alertas.service";
@@ -118,9 +117,6 @@ const routes: Routes = [
     ReportesService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
-
-    // provider used to create fake backend
-    // fakeBackendProvider
   ],
   bootstrap: [AppComponent]
 })

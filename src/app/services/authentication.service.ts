@@ -30,7 +30,6 @@ export class AuthenticationService {
     let usuarioURL =
       this.server + "/usuarios?filter[where][correo]=" + username;
     let data = await this.http.get<any[]>(usuarioURL).toPromise();
-    console.log(data);
     if (data.length > 0) {
       if (data[0].contrasenia == Md5.hashStr(password)) {
         let usuario = <Usuario>data;
@@ -42,7 +41,6 @@ export class AuthenticationService {
       }
     } else {
       this.success = false;
-      console.log("nomatch");
     }
 
     /*

@@ -46,7 +46,6 @@ export class LoginComponent implements OnInit {
     let pass = this.f.password.value;
     await this.authenticationService.login(user, pass);
     let success = this.authenticationService.loginSuccess();
-    console.log(success);
     this.loading = false;
     this.failedLogin = !success;
 
