@@ -33,4 +33,4 @@ npm install
 
 # Documentación del proyecto
 
-Anteproyecto_Equipo7.pdf
+[Anteproyecto_Equipo7.pdf](https://github.com/germanreyga/CONVI/blob/master/Anteproyecto_Equipo7.pdf)
